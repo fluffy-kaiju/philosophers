@@ -1,185 +1,212 @@
 <mxfile host="65bd71144e">
     <diagram id="OOQttIY_C0ZaDdTUUYR6" name="Page-1">
-        <mxGraphModel dx="624" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
+        <mxGraphModel dx="888" dy="635" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2336" pageHeight="1654" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="12" value="Rules" style="swimlane;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;connectable=0;" vertex="1" parent="1">
+                <mxCell id="12" value="Rules" style="swimlane;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;connectable=0;" parent="1" vertex="1">
                     <mxGeometry x="10" y="20" width="2080" height="760" as="geometry"/>
                 </mxCell>
-                <mxCell id="13" value="" style="group" vertex="1" connectable="0" parent="12">
+                <mxCell id="13" value="" style="group" parent="12" vertex="1" connectable="0">
                     <mxGeometry x="20" y="140" width="270" height="200" as="geometry"/>
                 </mxCell>
-                <mxCell id="2" value="Sleep" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="13">
+                <mxCell id="2" value="Sleep" style="rounded=1;whiteSpace=wrap;html=1;" parent="13" vertex="1">
                     <mxGeometry y="140" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="Think" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="13">
+                <mxCell id="3" value="Think" style="rounded=1;whiteSpace=wrap;html=1;" parent="13" vertex="1">
                     <mxGeometry x="150" y="70" width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="4" value="Eat" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="13">
+                <mxCell id="4" value="Eat" style="rounded=1;whiteSpace=wrap;html=1;" parent="13" vertex="1">
                     <mxGeometry width="120" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="9" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="13" source="3" target="2">
+                <mxCell id="9" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" parent="13" source="3" target="2" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="13" source="4" target="3">
+                <mxCell id="7" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="13" source="4" target="3" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="10" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="13" source="2" target="4">
+                <mxCell id="10" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="13" source="2" target="4" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="18" value="" style="group;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" connectable="0" parent="12">
+                <mxCell id="18" value="" style="group;fillColor=#fff2cc;strokeColor=#d6b656;" parent="12" vertex="1" connectable="0">
                     <mxGeometry x="20" y="40" width="310" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="17" value="&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;The philosophers alternatively eat, think, or sleep.&lt;/span&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;While they are eating, they are not thinking nor sleeping;&lt;/span&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;while thinking, they are not eating nor sleeping;&lt;/span&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;and, of course, while sleeping, they are not eating nor thinking.&lt;/span&gt;&lt;/p&gt;&lt;div&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=4;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="18">
+                <mxCell id="17" value="&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;The philosophers alternatively eat, think, or sleep.&lt;/span&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;While they are eating, they are not thinking nor sleeping;&lt;/span&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;while thinking, they are not eating nor sleeping;&lt;/span&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;and, of course, while sleeping, they are not eating nor thinking.&lt;/span&gt;&lt;/p&gt;&lt;div&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;align=left;verticalAlign=top;spacingLeft=4;fillColor=#fff2cc;strokeColor=#d6b656;" parent="18" vertex="1">
                     <mxGeometry width="310" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="35" value="Step 1" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="12">
+                <mxCell id="35" value="Step 1" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" parent="12" vertex="1">
                     <mxGeometry x="380" y="100" width="180" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="19" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="35">
+                <mxCell id="19" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" parent="35" vertex="1">
                     <mxGeometry x="10" y="35" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="20" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="35">
+                <mxCell id="20" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" parent="35" vertex="1">
                     <mxGeometry x="10" y="65" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="24" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="35">
+                <mxCell id="24" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="35" vertex="1">
                     <mxGeometry x="110" y="30" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="25" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="35">
+                <mxCell id="25" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="35" vertex="1">
                     <mxGeometry x="110" y="60" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="46" value="&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;The philosopher need two forks to eat&lt;/span&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;There are as many forks as philosophers.&lt;/span&gt;&lt;/p&gt;&lt;div&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;verticalAlign=middle;align=left;fillColor=#fff2cc;strokeColor=#d6b656;spacingLeft=4;" vertex="1" parent="12">
+                <mxCell id="46" value="&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;The philosopher need two forks to eat&lt;/span&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38; margin-top: 0pt; margin-bottom: 0pt;&quot;&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;There are as many forks as philosophers.&lt;/span&gt;&lt;/p&gt;&lt;div&gt;&lt;span style=&quot;font-family: &amp;quot;arial&amp;quot; ; background-color: transparent ; vertical-align: baseline&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;verticalAlign=middle;align=left;fillColor=#fff2cc;strokeColor=#d6b656;spacingLeft=4;" parent="12" vertex="1">
                     <mxGeometry x="380" y="40" width="260" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="47" value="Step 2" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="12">
+                <mxCell id="47" value="Step 2" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" parent="12" vertex="1">
                     <mxGeometry x="380" y="210" width="180" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="48" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="47">
+                <mxCell id="48" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" parent="47" vertex="1">
                     <mxGeometry x="10" y="35" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="49" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="47">
+                <mxCell id="49" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" parent="47" vertex="1">
                     <mxGeometry x="10" y="65" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="64" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="47" source="52" target="48">
+                <mxCell id="64" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" parent="47" source="52" target="48" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="65" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="47" source="52" target="49">
+                <mxCell id="65" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" parent="47" source="52" target="49" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="52" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="47">
+                <mxCell id="52" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="47" vertex="1">
                     <mxGeometry x="110" y="30" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="53" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="47">
+                <mxCell id="53" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="47" vertex="1">
                     <mxGeometry x="110" y="60" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="54" value="Step 4" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="12">
+                <mxCell id="54" value="Step 4" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" parent="12" vertex="1">
                     <mxGeometry x="380" y="430" width="180" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="55" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="54">
+                <mxCell id="55" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="54" vertex="1">
                     <mxGeometry x="10" y="35" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="56" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="54">
+                <mxCell id="56" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="54" vertex="1">
                     <mxGeometry x="10" y="65" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="57" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="54">
+                <mxCell id="57" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="54" vertex="1">
                     <mxGeometry x="110" y="30" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="58" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="54">
+                <mxCell id="58" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="54" vertex="1">
                     <mxGeometry x="110" y="60" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="61" value="lock two fork" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="12">
+                <mxCell id="61" value="lock two fork" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="12" vertex="1">
                     <mxGeometry x="570" y="130" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="62" value="lock two fork" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="12">
+                <mxCell id="62" value="lock two fork" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="12" vertex="1">
                     <mxGeometry x="570" y="460" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="63" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="12">
+                <mxCell id="63" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="12" vertex="1">
                     <mxGeometry x="570" y="100" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="66" value="use the two fork and eat" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="12">
+                <mxCell id="66" value="use the two fork and eat" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="12" vertex="1">
                     <mxGeometry x="570" y="240" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="67" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="12">
+                <mxCell id="67" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="12" vertex="1">
                     <mxGeometry x="570" y="210" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="68" value="Step 3" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="12">
+                <mxCell id="68" value="Step 3" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" parent="12" vertex="1">
                     <mxGeometry x="380" y="320" width="180" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="69" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="68">
+                <mxCell id="69" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" parent="68" vertex="1">
                     <mxGeometry x="10" y="35" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="70" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="68">
+                <mxCell id="70" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" parent="68" vertex="1">
                     <mxGeometry x="10" y="65" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="71" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="68">
+                <mxCell id="71" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="68" vertex="1">
                     <mxGeometry x="110" y="30" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="74" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="68">
+                <mxCell id="74" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="68" vertex="1">
                     <mxGeometry x="110" y="60" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="75" value="unlock the forks" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="12">
+                <mxCell id="75" value="unlock the forks" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="12" vertex="1">
                     <mxGeometry x="570" y="350" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="77" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="12">
+                <mxCell id="77" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="12" vertex="1">
                     <mxGeometry x="570" y="320" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="79" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="12">
+                <mxCell id="79" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="12" vertex="1">
                     <mxGeometry x="570" y="430" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="80" value="Step 5" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="12">
+                <mxCell id="80" value="Step 5" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" parent="12" vertex="1">
                     <mxGeometry x="380" y="540" width="180" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="81" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="80">
+                <mxCell id="81" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" parent="80" vertex="1">
                     <mxGeometry x="10" y="35" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="82" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="80">
+                <mxCell id="82" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;fillColor=#d5e8d4;strokeColor=#82b366;" parent="80" vertex="1">
                     <mxGeometry x="10" y="65" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="83" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="80" source="85" target="81">
+                <mxCell id="83" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" parent="80" source="85" target="81" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="84" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" edge="1" parent="80" source="85" target="82">
+                <mxCell id="84" style="edgeStyle=orthogonalEdgeStyle;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;" parent="80" source="85" target="82" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="85" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="80">
+                <mxCell id="85" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="80" vertex="1">
                     <mxGeometry x="110" y="30" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="86" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="80">
+                <mxCell id="86" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="80" vertex="1">
                     <mxGeometry x="110" y="60" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="87" value="use the two fork and eat" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="12">
+                <mxCell id="87" value="use the two fork and eat" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="12" vertex="1">
                     <mxGeometry x="570" y="570" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="88" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="12">
+                <mxCell id="88" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="12" vertex="1">
                     <mxGeometry x="570" y="540" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="89" value="Step 6" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="12">
+                <mxCell id="89" value="Step 6" style="swimlane;fontSize=10;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;" parent="12" vertex="1">
                     <mxGeometry x="380" y="650" width="180" height="100" as="geometry"/>
                 </mxCell>
-                <mxCell id="90" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="89">
+                <mxCell id="90" value="Fork1" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" parent="89" vertex="1">
                     <mxGeometry x="10" y="35" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="91" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" vertex="1" parent="89">
+                <mxCell id="91" value="Fork2" style="rounded=0;whiteSpace=wrap;html=1;fontSize=10;" parent="89" vertex="1">
                     <mxGeometry x="10" y="65" width="40" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="92" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="89">
+                <mxCell id="92" value="Philo1" style="whiteSpace=wrap;html=1;fontSize=14;labelBackgroundColor=none;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="89" vertex="1">
                     <mxGeometry x="110" y="30" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="93" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="89">
+                <mxCell id="93" value="Philo2" style="whiteSpace=wrap;html=1;fontSize=14;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="89" vertex="1">
                     <mxGeometry x="110" y="60" width="60" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="94" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="12">
+                <mxCell id="94" value="wait" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#d5e8d4;strokeColor=#82b366;" parent="12" vertex="1">
                     <mxGeometry x="570" y="650" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="95" value="unlock the forks" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="12">
+                <mxCell id="95" value="unlock the forks" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=12;gradientDirection=north;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="12" vertex="1">
                     <mxGeometry x="570" y="680" width="70" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="100" value="WIP" style="whiteSpace=wrap;html=1;shadow=0;glass=0;labelBackgroundColor=none;sketch=0;fontSize=51;gradientColor=none;gradientDirection=north;" vertex="1" parent="12">
-                    <mxGeometry x="750" y="130" width="120" height="60" as="geometry"/>
+                <mxCell id="116" value="&lt;span id=&quot;docs-internal-guid-d7a11db4-7fff-cddf-ac9e-3c8b6f36f1c9&quot; style=&quot;font-size: 9px&quot;&gt;&lt;p dir=&quot;ltr&quot; style=&quot;line-height: 1.38 ; margin-top: 0pt ; margin-bottom: 0pt ; font-size: 9px&quot;&gt;&lt;span style=&quot;font-size: 9px ; font-family: &amp;#34;arial&amp;#34; ; background-color: transparent ; vertical-align: baseline&quot;&gt;[number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep]&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: transparent ; font-family: &amp;#34;arial&amp;#34;&quot;&gt;[number_of_times_each_philosopher_must_eat]&lt;/span&gt;&lt;/p&gt;&lt;/span&gt;" style="whiteSpace=wrap;html=1;fontSize=9;align=center;verticalAlign=top;" vertex="1" parent="12">
+                    <mxGeometry x="670" y="30" width="490" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="102" value="Quand le premier est ocupé fait le second ?&lt;br&gt;Pense, dors ?" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;" vertex="1" parent="12">
-                    <mxGeometry x="750" y="205" width="250" height="30" as="geometry"/>
+                <mxCell id="118" value="eat" style="whiteSpace=wrap;html=1;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="12">
+                    <mxGeometry x="670" y="140" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="119" value="think" style="whiteSpace=wrap;html=1;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="12">
+                    <mxGeometry x="670" y="180" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="126" value="sleep" style="whiteSpace=wrap;html=1;fontSize=9;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="12">
+                    <mxGeometry x="790" y="140" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="127" value="eat" style="whiteSpace=wrap;html=1;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="12">
+                    <mxGeometry x="790" y="180" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="128" value="think" style="whiteSpace=wrap;html=1;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="12">
+                    <mxGeometry x="830" y="140" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="130" value="sleep" style="whiteSpace=wrap;html=1;fontSize=9;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="12">
+                    <mxGeometry x="910" y="180" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="131" value="eat" style="whiteSpace=wrap;html=1;fontSize=9;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="12">
+                    <mxGeometry x="910" y="140" width="120" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="132" value="think" style="whiteSpace=wrap;html=1;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="12">
+                    <mxGeometry x="950" y="180" width="80" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="117" value="2 99999 300 100" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=9;" vertex="1" parent="12">
+                    <mxGeometry x="670" y="120" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="133" value="Vertical Container" style="swimlane;fontSize=9;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="12">
+                    <mxGeometry x="670" y="100" width="360" height="120" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

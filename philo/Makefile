@@ -6,7 +6,7 @@
 #    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 08:35:24 by mahadad           #+#    #+#              #
-#    Updated: 2022/06/08 12:20:47 by mahadad          ###   ########.fr        #
+#    Updated: 2022/09/07 11:02:31 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,10 @@
 #                                  CONFIG
 # **************************************************************************** #
 
-NAME		= #NAME
+NAME		= philo
 
 # **************************************************************************** #
 
-# SRCS		=	
 
 SRCS		= $(SRCS_FIND)
 
@@ -35,9 +34,9 @@ CC			= gcc
 OBJ_EXT		= .o
 CODE_EXT	= .c
 HEAD_EXT	= .h
-INC			= -I include -I lib/libft/include -I lib/vector-lib/include
+INC			=
 FLAGS		= -Wall -Wextra -Werror
-FLAGS_COMP	= -lreadline
+FLAGS_COMP	=
 
 # **************************************************************************** #
 #                                  PARAMS

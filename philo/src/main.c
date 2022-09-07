@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:58:39 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/07 12:04:31 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/07 13:18:27 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,16 @@ void	check_pthread(int error)
 	}
 }
 
-void	philo_link_contructor(int nb, t_data *data)
-{
-	(void)nb;
-	(void)data;
-	//todo alloc all philo
-}
 
-void	struct_init_to_null(t_data *data)
-{
-	memset(data, 0, sizeof(t_data));
-}
-
-void	check_arg(int ac, char **av, t_data *data)
-{
-	if (ac < 4 || ac > 5)
-		philo_exit(EXIT_FAILURE, PH_BADARG1 PH_BADARG2, data);
-	(void)av;
-}
+void	arg_init(int ac, char **av, t_data *data);
+void	philo_link_contructor(int nb, t_data *data);
 
 int	main(int ac, char **av)
 {
 	t_data	data;
 
 	//TODO check arg
-	check_arg(ac, av, &data);
-	struct_init_to_null(&data);
+	arg_init(ac, av, &data);
 	//TODO store all arg in t_data;
 	philo_link_contructor(2, &data);
 	philo_exit(EXIT_SUCCESS, NULL, &data);

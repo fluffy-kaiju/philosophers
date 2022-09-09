@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/07 13:11:17 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/09 16:36:38 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 typedef struct s_philo
 {
 	pthread_t			thread;
-	int					fork;
+	pthread_mutex_t		fork;
 	struct s_philo		*next;
 }				t_philo;
 

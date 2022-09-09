@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:01:22 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/09 15:22:00 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/09 17:14:45 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include <stdio.h>
 #include <string.h>
 
+int	ft_atoi(const char *str);
+
 /**
  * @brief Create link list for all philo.
  */
@@ -23,18 +25,24 @@ static void	philo_data_constructor(int nb, t_data *data)
 {
 	t_philo	*tmp;
 
-	nb++;//NOTE if the code arrived here `nb` need to not be `0`.
+	//NOTE if the code arrived here `nb` need to not be `0`.
 	data->table = malloc(sizeof(t_philo));
 	if (!data->table)
-		philo_exit(EXIT_FAILURE, "t_philo alloc fail.", data);
+		philo_exit(EXIT_FAILURE, "t_philo alloc fail.\n", data);
 	tmp = data->table;
-	while (nb != 0)
+	if (PH_DEBUG)
+		printf("INFO: alloc t_philo [%p]\n", tmp);
+	while (nb > 0)
 	{
 		tmp->next = malloc(sizeof(t_philo));
 		if (!tmp->next)
-			philo_exit(EXIT_FAILURE, "t_philo alloc fail.", data);
+			philo_exit(EXIT_FAILURE, "t_philo alloc fail.\n", data);
+		if (PH_DEBUG)
+			printf("INFO: alloc t_philo [%p]->next[%p]\n", tmp, tmp->next);
+		tmp = tmp->next;
 		nb--;
 	}
+	tmp->next = data->table;
 }
 
 /**
@@ -74,6 +82,9 @@ static void	arg_check(int ac, char **av, t_data *data)
 	}
 }
 
+/**
+ * @brief //TODO check special case like `nb_philo` = `0`.
+ */
 static void	set_data(int ac, char **av, t_data *data)
 {
 	struct_to_null(data, sizeof(t_data));
@@ -93,8 +104,6 @@ static void	set_data(int ac, char **av, t_data *data)
 	}
 }
 
-int	ft_atoi(const char *str);
-
 /**
  * @brief Will skip the first `ac` and `av` arg. Check if the args are only
  *        digit character and populate the data struct.
@@ -106,6 +115,17 @@ void	arg_init(int ac, char **av, t_data *data)
 	if (!(ac == 4 || ac == 5))
 		philo_exit(EXIT_FAILURE, PH_BADARG1 PH_BADARG2, data);
 	arg_check(ac, av, data);
-
-	philo_data_constructor(ac, data);
+	set_data(ac, av, data);
+	//TODO store all arg in t_data;
+	philo_data_constructor(data->nb_philo, data);
+//////////////////  DEBUG  /////////////////////
+/**/	setbuf(stdout, NULL);
+/**/	t_philo *test = data->table;
+/**/	for (int i = 0; i < data->nb_philo; i++)
+/**/	{
+/**/		printf("[%d:%p]->", i, test);
+/**/		test = test->next;
+/**/	}
+/**/	printf("[0:%p]", test->next);
+//////////////////////TODO REMOVE///////////////
 }

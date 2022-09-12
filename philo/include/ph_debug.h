@@ -1,1 +1,1 @@
-/Users/fluffy/Code/philosophers/philo/src/ph_debug.h
+/System/Volumes/Data/sgoinfre/students/mahadad/philosophers/philo/src/ph_debug.h

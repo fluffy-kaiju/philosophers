@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:01:22 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/09 17:14:45 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/12 14:06:30 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void	philo_data_constructor(int nb, t_data *data)
 	t_philo	*tmp;
 
 	//NOTE if the code arrived here `nb` need to not be `0`.
+	nb--;
 	data->table = malloc(sizeof(t_philo));
 	if (!data->table)
 		philo_exit(EXIT_FAILURE, "t_philo alloc fail.\n", data);

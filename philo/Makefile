@@ -6,7 +6,7 @@
 #    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 08:35:24 by mahadad           #+#    #+#              #
-#    Updated: 2022/09/07 13:41:25 by mahadad          ###   ########.fr        #
+#    Updated: 2022/09/13 15:31:51 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -230,6 +230,10 @@ git:
 	@git commit -am "Makefile push `date +'%Y-%m-%d %H:%M:%S'`"
 	@-git push
 
+fluffy:
+	git config user.name "matthew-dreemurr"
+	git config user.email "hadadmat@gmail.com"
+
 # **************************************************************************** #
 
-.PHONY: remove_stuff, update_lib, update, ping, ping_lib, git
+.PHONY: remove_stuff, update_lib, update, ping, ping_lib, git, fluffy

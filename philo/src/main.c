@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:58:39 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/09 17:13:49 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/13 14:29:28 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,8 @@
 
 #include "philo.h"
 
-void	check_pthread(int error)
-{
-	if (error)
-	{
-		printf("Error pthread_mutex_lock : %s\n", strerror(error));
-		exit (EXIT_FAILURE);
-	}
-}
-
 void	arg_init(int ac, char **av, t_data *data);
-void	philo_link_contructor(int nb, t_data *data);
+void	run(t_data *data);
 
 /**
  * Step 1:
@@ -43,5 +34,6 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	arg_init(ac, av, &data);
+	run(&data);
 	philo_exit(EXIT_SUCCESS, NULL, &data);
 }

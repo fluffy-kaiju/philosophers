@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:01:22 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/12 14:06:30 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/13 15:16:42 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,22 @@ static void	philo_data_constructor(int nb, t_data *data)
 	t_philo	*tmp;
 
 	//NOTE if the code arrived here `nb` need to not be `0`.
-	nb--;
+	// nb--;
 	data->table = malloc(sizeof(t_philo));
 	if (!data->table)
 		philo_exit(EXIT_FAILURE, "t_philo alloc fail.\n", data);
 	tmp = data->table;
 	if (PH_DEBUG)
-		printf("INFO: alloc t_philo [%p]\n", tmp);
+		printf("INFO: alloc t_philo [%d][%p]\n", nb, tmp);
 	while (nb > 0)
 	{
+		tmp->num = nb;
+		if (PH_DEBUG)
+			printf("INFO: alloc t_philo [%d][%p]->next[%p]\n", nb, tmp,
+				tmp->next);
 		tmp->next = malloc(sizeof(t_philo));
 		if (!tmp->next)
 			philo_exit(EXIT_FAILURE, "t_philo alloc fail.\n", data);
-		if (PH_DEBUG)
-			printf("INFO: alloc t_philo [%p]->next[%p]\n", tmp, tmp->next);
 		tmp = tmp->next;
 		nb--;
 	}
@@ -48,8 +50,6 @@ static void	philo_data_constructor(int nb, t_data *data)
 
 /**
  * @brief Will set all the memory block of a struct to `0` bit.
- * 
- * @param data 
  */
 static void	struct_to_null(void *data, int size)
 {
@@ -117,16 +117,5 @@ void	arg_init(int ac, char **av, t_data *data)
 		philo_exit(EXIT_FAILURE, PH_BADARG1 PH_BADARG2, data);
 	arg_check(ac, av, data);
 	set_data(ac, av, data);
-	//TODO store all arg in t_data;
 	philo_data_constructor(data->nb_philo, data);
-//////////////////  DEBUG  /////////////////////
-/**/	setbuf(stdout, NULL);
-/**/	t_philo *test = data->table;
-/**/	for (int i = 0; i < data->nb_philo; i++)
-/**/	{
-/**/		printf("[%d:%p]->", i, test);
-/**/		test = test->next;
-/**/	}
-/**/	printf("[0:%p]", test->next);
-//////////////////////TODO REMOVE///////////////
 }

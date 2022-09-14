@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:01:22 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/13 15:16:42 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/14 12:26:00 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,27 @@ int	ft_atoi(const char *str);
  */
 static void	philo_data_constructor(int nb, t_data *data)
 {
-	t_philo	*tmp;
+	pthread_mutex_t	*tmp;
 
 	//NOTE if the code arrived here `nb` need to not be `0`.
-	// nb--;
-	data->table = malloc(sizeof(t_philo));
+	data->table = malloc(sizeof(t_philo) * nb);
 	if (!data->table)
-		philo_exit(EXIT_FAILURE, "t_philo alloc fail.\n", data);
-	tmp = data->table;
+		philo_exit(EXIT_FAILURE, "data->table alloc fail.\n", data);
 	if (PH_DEBUG)
-		printf("INFO: alloc t_philo [%d][%p]\n", nb, tmp);
+		printf("INFO: alloc data->table[%d]\n", nb);
+	data->table[nb-1].next = &data->table[0].fork;
+	tmp = &data->table[nb-1].fork;
+	nb--;
 	while (nb > 0)
 	{
-		tmp->num = nb;
 		if (PH_DEBUG)
-			printf("INFO: alloc t_philo [%d][%p]->next[%p]\n", nb, tmp,
-				tmp->next);
-		tmp->next = malloc(sizeof(t_philo));
-		if (!tmp->next)
-			philo_exit(EXIT_FAILURE, "t_philo alloc fail.\n", data);
-		tmp = tmp->next;
-		nb--;
+			printf("INFO: init data->table[%d]\n", nb-1);
+		data->table[nb-1].num = nb;
+		data->table[nb-1].next = tmp;
+		tmp = &data->table[nb-1].fork;	
+		nb --;
 	}
-	tmp->next = data->table;
+	//TODO debug check all next
 }
 
 /**

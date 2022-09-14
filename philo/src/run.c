@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/13 15:27:30 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/14 12:24:19 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,28 @@
 static void	mutex_init(t_data *data)
 {
 	int		x;
-	t_philo	*tmp;
 
 	x = 0;
-	tmp = data->table;
 	while (x < data->nb_philo)
 	{
 		if (PH_DEBUG)
-			printf("INFO: init mutext for t_philo [%p]\n", tmp);
-		if (pthread_mutex_init(&tmp->fork, NULL))
+			printf("INFO: init mutext for t_philo [%d]\n", x);
+		if (pthread_mutex_init(&data->table[x].fork, NULL))
 			philo_exit(EXIT_FAILURE, "pthread_mutex_init fail !\n", data);
-		tmp = tmp->next;
 		x++;
 	}
 }
 
-// typedef struct s_run
+// static void	philo_routine(t_philo *this)
 // {
-// 	t_data *data;
-// 	t_philo *philo;
-// }				t_run;
-
-
-// static void	philo_routine(t_run data)
-// {
-// 	printf("INFO: philo [%d]:[%p] start\n", num, this);
+// 	printf("INFO: philo [%d]:[%p] start\n", this->num, this);
 // }
 
 // static void	create_thread(t_philo *philo, int num)
 // {
-// 	t_run arg;
-
-// 	arg.data = data;
-// 	pthread_create(&philo->thread, NULL, &philo_routine, );
+// 	(void)num;
+// 	(void)philo;
+// 	// pthread_create(&philo->thread, NULL, &philo_routine, );
 // }
 
 void	run(t_data *data)

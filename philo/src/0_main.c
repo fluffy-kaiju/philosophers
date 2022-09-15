@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:58:39 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 14:08:31 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 14:25:22 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
+	ac--;
+	av++;
 	parser(ac, av, &data);
 	init_data(ac, av, &data);
 	run(&data);

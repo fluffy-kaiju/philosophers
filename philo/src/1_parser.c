@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:01:22 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 14:08:52 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 14:25:07 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ static void	arg_check(int ac, char **av, t_data *data)
  */
 void	parser(int ac, char **av, t_data *data)
 {
-	ac--;
-	av++;
 	if (!(ac == 4 || ac == 5))
 		philo_exit(EXIT_FAILURE, PH_BADARG1 PH_BADARG2, data);
 	arg_check(ac, av, data);

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 14:08:54 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 14:46:56 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@
 
 int		ft_atoi(const char *str);
 void	*ft_calloc(size_t size);
+
+static void	mutex_init(t_data *data)
+{
+	int		x;
+
+	x = 0;
+	while (x < data->nb_philo)
+	{
+		if (PH_DEBUG)
+			printf("INFO: init mutext for t_philo [%d]\n", x);
+		if (pthread_mutex_init(&data->table[x].fork, NULL))
+			philo_exit(EXIT_FAILURE, "pthread_mutex_init fail !\n", data);
+		x++;
+	}
+}
 
 /**
  * @brief Get the index
@@ -43,17 +58,18 @@ static void	philo_data_constructor(int nb, t_data *data)
 	if (!data->table)
 		philo_exit(EXIT_FAILURE, "data->table alloc fail.\n", data);
 	table = data->table;
-	if (PH_DEBUG)
-		printf("INFO: alloc data->table size[%d]\n"
-			"INFO: init data->table[%d] philo[%d]\n", nb, nb-1, nb);
 	i = 0;
-	while (i <= nb)
+	while (i < nb)
 	{
 		if (PH_DEBUG)
-			printf("INFO: init data->table[%d] philo[%d]\n", nb-1, nb);
+			printf("INFO: init data->table[%d] philo[%d]\n", i, i+1);
 		table[get_index(i, nb)].next = &table[get_index(i + 1, nb)].fork;
-		table[get_index(i, nb)].num = nb;
+		table[get_index(i, nb)].num = i + 1;
 		table[get_index(i, nb)].data = data;
+		table[get_index(i, nb)].time_die = data->time_die;
+		table[get_index(i, nb)].time_eat = data->time_eat;
+		table[get_index(i, nb)].time_sleep = data->time_sleep;
+		table[get_index(i, nb)].nb_must_eat = data->nb_must_eat;
 		i++;
 	}
 	//TODO REMOVE DEBUG
@@ -97,4 +113,5 @@ void	init_data(int ac, char **av, t_data *data)
 			data->nb_must_eat);
 	}
 	philo_data_constructor(data->nb_philo, data);
+	mutex_init(data);
 }

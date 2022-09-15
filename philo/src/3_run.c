@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run.c                                              :+:      :+:    :+:   */
+/*   3_run.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 14:03:00 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 14:31:31 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static void	mutex_init(t_data *data)
-{
-	int		x;
-
-	x = 0;
-	while (x < data->nb_philo)
-	{
-		if (PH_DEBUG)
-			printf("INFO: init mutext for t_philo [%d]\n", x);
-		if (pthread_mutex_init(&data->table[x].fork, NULL))
-			philo_exit(EXIT_FAILURE, "pthread_mutex_init fail !\n", data);
-		x++;
-	}
-}
-
-void	*philo_routine(void *this)
-{
-	(void)this;
-	t_philo *me;
-
-	me = this;
-	printf("Ping [%d]\n", me->num);
-	return 0;
-}
+void	*philo_routine(void *this);
 
 static void	create_thread(t_philo *philo)
 {
@@ -49,7 +26,6 @@ static void	create_thread(t_philo *philo)
 void	run(t_data *data)
 {
 	int	i;
-	mutex_init(data);
 	i = 0;
 	while (i < data->nb_philo)
 	{

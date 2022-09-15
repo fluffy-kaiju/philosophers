@@ -6,7 +6,7 @@
 #    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 08:35:24 by mahadad           #+#    #+#              #
-#    Updated: 2022/09/13 15:31:51 by mahadad          ###   ########.fr        #
+#    Updated: 2022/09/15 14:24:10 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ CC			= gcc
 OBJ_EXT		= .o
 CODE_EXT	= .c
 HEAD_EXT	= .h
-INC			=
+INC			= -I include
 FLAGS		= -Wall -Wextra -Werror
 FLAGS_COMP	=
 

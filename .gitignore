@@ -53,3 +53,5 @@ dkms.conf
 philo/philo
 philo/include/*
 .$Logic.drawio.bkp
+.vscode/settings.json
+philo/log

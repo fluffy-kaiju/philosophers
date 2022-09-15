@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   0_main.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:58:39 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/13 14:29:28 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 14:08:31 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 
 #include "philo.h"
 
-void	arg_init(int ac, char **av, t_data *data);
+void	parser(int ac, char **av, t_data *data);
+void	init_data(int ac, char **av, t_data *data);
 void	run(t_data *data);
 
 /**
  * Step 1:
- *        Will init all data structure with `arg_init`. First check if all
+ *        Will init all data structure with `parser`. First check if all
  *        input are only positif numeric then storing in a linked list.
  * Step 2:
  *        Init all the mutex for each `t_philo->fork` and `t_philo->thread`.
@@ -33,7 +34,8 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	arg_init(ac, av, &data);
+	parser(ac, av, &data);
+	init_data(ac, av, &data);
 	run(&data);
 	philo_exit(EXIT_SUCCESS, NULL, &data);
 }

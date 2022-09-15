@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 16:42:21 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 17:03:35 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 int		ft_atoi_strict(const char *str, int *ptr);
 void	*ft_calloc(size_t size);
 
-static void	mutex_init(t_data *data)
+static int	mutex_init(t_data *data)
 {
 	int		x;
 
@@ -29,9 +29,13 @@ static void	mutex_init(t_data *data)
 		if (PH_DEBUG)
 			printf("INFO: init mutext for t_philo [%d]\n", x);
 		if (pthread_mutex_init(&data->table[x].fork, NULL))
+		{
 			philo_exit(EXIT_FAILURE, "pthread_mutex_init fail !\n", data);
+			return (EXIT_FAILURE);
+		}
 		x++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -49,14 +53,17 @@ int	get_index(int index, int len)
 /**
  * @brief Create link list for all philo.
  */
-static void	philo_data_constructor(int nb, t_data *data)
+static int	philo_data_constructor(int nb, t_data *data)
 {
 	int				i;
 	t_philo			*table;
-	//NOTE if the code arrived here `nb` need to not be `0`.
+
 	data->table = ft_calloc(sizeof(t_philo) * nb);
 	if (!data->table)
+	{
 		philo_exit(EXIT_FAILURE, "data->table alloc fail.\n", data);
+		return (EXIT_FAILURE);
+	}
 	table = data->table;
 	i = 0;
 	while (i < nb)
@@ -74,9 +81,8 @@ static void	philo_data_constructor(int nb, t_data *data)
 	}
 	//TODO REMOVE DEBUG
 	for (int i = 0; i < data->nb_philo; i++)
-	{
 		printf("[%p]->[%p]\n", &table[i].fork, table[i].next);
-	}
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -94,18 +100,19 @@ int	argtoint(int ac, char **av, t_data *data)
 		overflow += ft_atoi_strict(av[4], &data->nb_must_eat);
 	if (overflow)
 	{
-		philo_exit(EXIT_FAILURE, "arg int overflow !", data);
+		philo_exit(EXIT_FAILURE, PH_ORVERFLO, data);
 		return (EXIT_FAILURE);
 	}
 	if (data->nb_philo < 1)
 	{
-		philo_exit(EXIT_FAILURE, "need at least one philosopher\n", data);
+		philo_exit(EXIT_FAILURE, PH_ONEPHILO, data);
 		return (EXIT_FAILURE);
 	}
+	return (EXIT_SUCCESS);
 }
 
 /**
- * @brief //TODO check special case like `nb_philo` = `0`.
+ * @brief
  */
 int	init_data(int ac, char **av, t_data *data)
 {
@@ -113,18 +120,19 @@ int	init_data(int ac, char **av, t_data *data)
 		return (EXIT_FAILURE);
 	if (pthread_mutex_init(&data->stdout_print, NULL))
 	{
-		philo_exit(EXIT_FAILURE, "pthread_mutex_init data->stdout_print fail !",
-			data);
+		philo_exit(EXIT_FAILURE, PH_STDPRINTMUT, data);
 		return (EXIT_FAILURE);
 	}
-	//TODO make behaviour for the `0` case
 	if (PH_DEBUG)
 	{
-		printf("nb_philo    [%lu]\ntime_die    [%lu]\n"
-			"time_sleep  [%lu]\nnb_must_eat [%lu]\n",
+		printf("nb_philo    [%d]\ntime_die    [%d]\n"
+			"time_sleep  [%d]\nnb_must_eat [%d]\n",
 			data->nb_philo, data->time_die, data->time_sleep,
 			data->nb_must_eat);
 	}
-	philo_data_constructor(data->nb_philo, data);
-	mutex_init(data);
+	if (philo_data_constructor(data->nb_philo, data))
+		return (EXIT_FAILURE);
+	if (mutex_init(data))
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

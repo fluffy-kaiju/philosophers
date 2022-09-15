@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 16:39:25 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 16:46:44 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 
 # define PH_BADARG1 "usage: anumber_of_philosophers time_to_die time_to_eat tim"
 # define PH_BADARG2 "e_to_sleep [number_of_times_each_philosopher_must_eat]\n"
-
+# define PH_ONEPHILO "need at least one philosopher\n"
+# define PH_ORVERFLO "arg int overflow !\n"
+# define PH_STDPRINTMUT "pthread_mutex_init data->stdout_print fail !\n"
 typedef struct s_data	t_data;
 
 typedef struct s_philo

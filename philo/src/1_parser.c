@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:01:22 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 15:33:10 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 17:04:12 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int	arg_check(int ac, char **av, t_data *data)
 		y = 0;
 		x++;
 	}
+	return (EXIT_SUCCESS);
 }
 
 /**
@@ -58,4 +59,5 @@ int	parser(int ac, char **av, t_data *data)
 	}
 	if (arg_check(ac, av, data))
 		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }

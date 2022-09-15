@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_strict.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 16:37:05 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 17:04:26 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int overflow_check(unsigned long nbr, int next_char, int isneg)
 		cutoff = (unsigned long)(INT_MAX / 10);
 		cutlim = (int)(INT_MAX % 10);
 	}
-	printf("cutlim: %d\ncutoff: %lu\n", cutlim, cutoff);
 	if (nbr > cutoff || (nbr == cutoff && (int)(next_char - '0') > cutlim))
 		return (1);
 	return (0);

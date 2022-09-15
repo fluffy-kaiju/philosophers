@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 15:47:48 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 15:58:51 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ int	ft_atoi_strict(const char *str, int *ptr)
 	cutlim = (int)(INT_MAX % 10);
 	while (ft_isdigit((int)*str))
 	{
-		if (nbr > cutoff || (nbr == cutoff && (int)(*str - '0') > cutlim))
+		if (nbr > cutoff || (nbr == cutoff && (int)(*str - '0') > cutlim))//TODO make a overflow check function
 			return (1);
 		nbr *= 10;
 		nbr += (*str - '0');
 		str++;
 	}
-	ptr = (int []){nbr, -nbr}[isneg];
+	*ptr = (int []){nbr, -nbr}[isneg];
 	return (0);
 }

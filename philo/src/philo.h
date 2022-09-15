@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 14:46:45 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 16:39:25 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ typedef struct s_philo
 typedef struct s_data
 {
 	t_philo				*table;
-	long				nb_philo;
-	long				time_die;
-	long				time_eat;
-	long				time_sleep;
-	long				nb_must_eat;
+	int				nb_philo;
+	int				time_die;
+	int				time_eat;
+	int				time_sleep;
+	int				nb_must_eat;
 	pthread_mutex_t		stdout_print;
 }				t_data;
 

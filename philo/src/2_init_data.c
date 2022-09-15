@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 15:42:57 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 16:42:21 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int		ft_atoi(const char *str);
+int		ft_atoi_strict(const char *str, int *ptr);
 void	*ft_calloc(size_t size);
 
 static void	mutex_init(t_data *data)
@@ -84,21 +84,22 @@ static void	philo_data_constructor(int nb, t_data *data)
  */
 int	argtoint(int ac, char **av, t_data *data)
 {
-	data->nb_philo = ft_atoi(av[0]);
+	int	overflow;
+
+	overflow = ft_atoi_strict(av[0], &data->nb_philo);
+	overflow += ft_atoi_strict(av[1], &data->time_die);
+	overflow += ft_atoi_strict(av[2], &data->time_eat);
+	overflow += ft_atoi_strict(av[3], &data->time_sleep);
+	if (ac == 5)
+		overflow += ft_atoi_strict(av[4], &data->nb_must_eat);
+	if (overflow)
+	{
+		philo_exit(EXIT_FAILURE, "arg int overflow !", data);
+		return (EXIT_FAILURE);
+	}
 	if (data->nb_philo < 1)
 	{
 		philo_exit(EXIT_FAILURE, "need at least one philosopher\n", data);
-		return (EXIT_FAILURE);
-	}
-	data->time_die = ft_atoi(av[1]);
-	data->time_eat = ft_atoi(av[2]);
-	data->time_sleep = ft_atoi(av[3]);
-	if (ac == 5)
-		data->nb_must_eat = ft_atoi(av[4]);
-	if (data->time_die < 0 || data->time_eat < 0 || data->time_sleep < 0 ||
-		data->nb_must_eat < 0)
-	{
-		philo_exit(EXIT_FAILURE, "arg int overflow !", data);
 		return (EXIT_FAILURE);
 	}
 }

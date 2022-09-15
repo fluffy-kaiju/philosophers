@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:01:22 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/14 12:26:00 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 12:00:31 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include <stdio.h>
 #include <string.h>
 
-int	ft_atoi(const char *str);
-
+int		ft_atoi(const char *str);
+void	*ft_calloc(size_t size);
 /**
  * @brief Create link list for all philo.
  */
@@ -26,24 +26,31 @@ static void	philo_data_constructor(int nb, t_data *data)
 	pthread_mutex_t	*tmp;
 
 	//NOTE if the code arrived here `nb` need to not be `0`.
-	data->table = malloc(sizeof(t_philo) * nb);
+	data->table = ft_calloc(sizeof(t_philo) * nb);
 	if (!data->table)
 		philo_exit(EXIT_FAILURE, "data->table alloc fail.\n", data);
 	if (PH_DEBUG)
-		printf("INFO: alloc data->table[%d]\n", nb);
+		printf("INFO: alloc data->table size[%d]\n"
+			"INFO: init data->table[%d] philo[%d]\n", nb, nb-1, nb);
 	data->table[nb-1].next = &data->table[0].fork;
+	data->table[nb-1].num = nb;
 	tmp = &data->table[nb-1].fork;
 	nb--;
 	while (nb > 0)
 	{
 		if (PH_DEBUG)
-			printf("INFO: init data->table[%d]\n", nb-1);
+			printf("INFO: init data->table[%d] philo[%d]\n", nb-1, nb);
+		data->table[nb-1].data = data;
 		data->table[nb-1].num = nb;
 		data->table[nb-1].next = tmp;
-		tmp = &data->table[nb-1].fork;	
+		tmp = &data->table[nb-1].fork;
 		nb --;
 	}
-	//TODO debug check all next
+	//TODO REMOVE DEBUG
+	for (int i = 0; i < data->nb_philo; i++)
+	{
+		printf("[%p]->[%p]\n", &data->table[i].fork, data->table[i].next);
+	}
 }
 
 /**
@@ -93,6 +100,9 @@ static void	set_data(int ac, char **av, t_data *data)
 	data->time_sleep = ft_atoi(av[3]);
 	if (ac == 5)
 		data->nb_must_eat = ft_atoi(av[4]);
+	if (pthread_mutex_init(&data->stdout_print, NULL))
+		philo_exit(EXIT_FAILURE, "pthread_mutex_init data->stdout_print fail !",
+			data);
 	//TODO make behaviour for the `0` case
 	if (PH_DEBUG)
 	{

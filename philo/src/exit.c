@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:41:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/07 12:03:21 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 12:01:44 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static size_t	strlen_protect(const char *s)
 static void	philo_free(t_data *data)
 {
 	(void)data;
+	free (data->table);
 	//free all alloc in t_data;
 }
 
@@ -46,6 +47,8 @@ static void	philo_free(t_data *data)
  */
 void	philo_exit(int error, char *msg, t_data *data)
 {
+	//TODO join all init thread
+	//TODO destroy all mutex
 	philo_free(data);
 	if (error)
 	{

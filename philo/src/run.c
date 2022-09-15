@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/14 12:24:19 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 11:24:54 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,45 @@ static void	mutex_init(t_data *data)
 	}
 }
 
-// static void	philo_routine(t_philo *this)
-// {
-// 	printf("INFO: philo [%d]:[%p] start\n", this->num, this);
-// }
+void	*philo_routine(void *this)
+{
+	(void)this;
+	t_philo *me;
 
-// static void	create_thread(t_philo *philo, int num)
-// {
-// 	(void)num;
-// 	(void)philo;
-// 	// pthread_create(&philo->thread, NULL, &philo_routine, );
-// }
+	me = this;
+	printf("Ping [%d]\n", me->num);
+	return 0;
+}
+
+static void	create_thread(t_philo *philo)
+{
+	if (pthread_create(&philo->thread, NULL, &philo_routine, philo))
+		philo_exit(EXIT_FAILURE, "phtread_create fail !", philo->data);
+}
 
 void	run(t_data *data)
 {
 	int	i;
-
 	mutex_init(data);
 	i = 0;
 	while (i < data->nb_philo)
 	{
 		if (i % 2)
-			printf("%d\n", i);
+			create_thread(&data->table[i]);
 		i++;
 	}
-	
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		if (!(i % 2))
+			create_thread(&data->table[i]);
+		i++;
+	}
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		if (pthread_join(data->table[i].thread, NULL))
+			philo_exit(EXIT_FAILURE, "pthread_join fail !", data);
+		i++;
+	}
 }

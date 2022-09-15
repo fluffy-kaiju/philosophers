@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 14:46:56 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 15:42:57 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,30 +80,42 @@ static void	philo_data_constructor(int nb, t_data *data)
 }
 
 /**
- * @brief Will set all the memory block of a struct to `0` bit.
+ * @brief Use ft_atoi to convert
  */
-static void	struct_to_null(void *data, int size)
+int	argtoint(int ac, char **av, t_data *data)
 {
-	memset((char *)data, 0, size);
-}
-
-/**
- * @brief //TODO check special case like `nb_philo` = `0`.
- */
-void	init_data(int ac, char **av, t_data *data)
-{
-	struct_to_null(data, sizeof(t_data));
 	data->nb_philo = ft_atoi(av[0]);
 	if (data->nb_philo < 1)
+	{
 		philo_exit(EXIT_FAILURE, "need at least one philosopher\n", data);
+		return (EXIT_FAILURE);
+	}
 	data->time_die = ft_atoi(av[1]);
 	data->time_eat = ft_atoi(av[2]);
 	data->time_sleep = ft_atoi(av[3]);
 	if (ac == 5)
 		data->nb_must_eat = ft_atoi(av[4]);
+	if (data->time_die < 0 || data->time_eat < 0 || data->time_sleep < 0 ||
+		data->nb_must_eat < 0)
+	{
+		philo_exit(EXIT_FAILURE, "arg int overflow !", data);
+		return (EXIT_FAILURE);
+	}
+}
+
+/**
+ * @brief //TODO check special case like `nb_philo` = `0`.
+ */
+int	init_data(int ac, char **av, t_data *data)
+{
+	if (argtoint(ac, av, data))
+		return (EXIT_FAILURE);
 	if (pthread_mutex_init(&data->stdout_print, NULL))
+	{
 		philo_exit(EXIT_FAILURE, "pthread_mutex_init data->stdout_print fail !",
 			data);
+		return (EXIT_FAILURE);
+	}
 	//TODO make behaviour for the `0` case
 	if (PH_DEBUG)
 	{

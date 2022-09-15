@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 14:11:22 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 15:47:48 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,11 @@
 
 int	ft_isdigit(int c);
 
-/*
-* SYNOPSIS
-*   #include <stdlib.h>
-* 
-*   int
-*   atoi(const char *str);
-* 
-* DESCRIPTION
-*   The atoi() function converts the initial portion of the string pointed to
-*   by str to int representation.
-* 
-*   It is equivalent to:
-* 
-*     (int)strtol(str, (char **)NULL, 10);
-* 
-*   While the atoi() function uses the current locale, the atoi_l() function
-*   may be passed a locale directly. See xlocale(3) for more information.
-* 
-* IMPLEMENTATION NOTES
-*   The atoi() and atoi_l() functions are thread-safe and async-cancel-safe.
-* 
-*   The strtol() and strtol_l() functions are recommended instead of atoi()
-*   and atoi_l() functions, especially in new code.
-* 
-* ERRORS
-*   The function atoi() need not affect the value of errno on an error.
-*/
-
-int	ft_atoi(const char *str)
+/**
+ * @brief Same as ft_atoi but ft_atoi_strict will return non 0 if a overflow
+ * occur.
+ */
+int	ft_atoi_strict(const char *str, int *ptr)
 {
 	unsigned long	nbr;
 	unsigned long	cutoff;
@@ -55,15 +31,16 @@ int	ft_atoi(const char *str)
 		str++;
 	isneg = (*str == '-');
 	str += (isneg || *str == '+');
-	cutoff = (unsigned long)(LONG_MAX / 10);
-	cutlim = (int)(LONG_MAX % 10);
+	cutoff = (unsigned long)(INT_MAX / 10);
+	cutlim = (int)(INT_MAX % 10);
 	while (ft_isdigit((int)*str))
 	{
 		if (nbr > cutoff || (nbr == cutoff && (int)(*str - '0') > cutlim))
-			return (-!isneg);
+			return (1);
 		nbr *= 10;
 		nbr += (*str - '0');
 		str++;
 	}
-	return ((int []){nbr, -nbr}[isneg]);
+	ptr = (int []){nbr, -nbr}[isneg];
+	return (0);
 }

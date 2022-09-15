@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 15:04:16 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 15:26:01 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,26 @@
 #include <unistd.h>
 #include <sys/time.h>
 
-long	gettime(struct timeval *time)
+static long	time_constructor(long sec, int usec)
 {
-	gettimeofday(time, NULL);
-	return (time->tv_sec * 1000) + (time->tv_usec / 1000);
+	return (sec * 1000) + (usec / 1000);
 }
+
+static long	gettime(struct timeval *time)
+{
+	if (gettimeofday(time, NULL))
+		return 0;
+	return time_constructor(time->tv_sec, time->tv_usec);
+}
+
+// static void	check_death(struct timeval *time)
+// {
+// 	long	tmp;
+
+// 	tmp = time_constructor(time->tv_sec, time->tv_usec);
+// 	gettimeofday
+// 	if ( tmp)
+// }
 
 void	*philo_routine(void *this)
 {

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:41:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 12:01:44 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/15 15:30:12 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	philo_free(t_data *data)
  */
 void	philo_exit(int error, char *msg, t_data *data)
 {
-	//TODO join all init thread
+	//TODO join all thread
 	//TODO destroy all mutex
 	philo_free(data);
 	if (error)
@@ -57,7 +57,5 @@ void	philo_exit(int error, char *msg, t_data *data)
 			write(STDERR_FILENO, "Error: ", 8);
 			write(STDERR_FILENO, msg, strlen_protect(msg));
 		}
-		exit(EXIT_FAILURE);
 	}
-	exit(EXIT_SUCCESS);
 }

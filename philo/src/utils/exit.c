@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:41:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 15:30:12 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/16 11:32:36 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static size_t	strlen_protect(const char *s)
  */
 static void	philo_free(t_data *data)
 {
-	(void)data;
 	free (data->table);
 	//free all alloc in t_data;
 }

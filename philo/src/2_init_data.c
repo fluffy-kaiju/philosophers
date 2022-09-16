@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 17:03:35 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/16 14:15:33 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int	init_data(int ac, char **av, t_data *data)
 {
 	if (argtoint(ac, av, data))
 		return (EXIT_FAILURE);
-	if (pthread_mutex_init(&data->stdout_print, NULL))
+	if (pthread_mutex_init(&data->data_rw, NULL))
 	{
 		philo_exit(EXIT_FAILURE, PH_STDPRINTMUT, data);
 		return (EXIT_FAILURE);

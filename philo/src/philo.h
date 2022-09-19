@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/16 16:15:20 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/19 11:39:10 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@
 # define PH_BADARG2 "e_to_sleep [number_of_times_each_philosopher_must_eat]\n"
 # define PH_ONEPHILO "need at least one philosopher\n"
 # define PH_ORVERFLO "arg int overflow !\n"
-# define PH_STDPRINTMUT "pthread_mutex_init data->data_rw fail !\n"
+# define PH_MUTALLOC "pthread_mutex_init alloc fail !\n"
+
+# define PH_FORK "has taken a fork"
+# define PH_EAT "is eating"
+# define PH_SLEEP "is sleeping"
+# define PH_THINK "is thinking"
+# define PH_DEATH "died"
+
 typedef struct s_data	t_data;
 
 typedef struct s_philo
@@ -50,6 +57,8 @@ typedef struct s_data
 	int				philo_die;
 	int				philo_error;
 	pthread_mutex_t	data_rw;
+	pthread_mutex_t	print_stdout_rw;
+	int				print_stdout;
 }				t_data;
 
 void	philo_exit(int error, char *msg, t_data *data);

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/16 13:42:22 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/19 11:41:05 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ static int	luncher(t_data *data, int odd)
 	return (EXIT_SUCCESS);
 }
 
+// //TODO REMOVE !!
+//      #include <unistd.h>
+// static void	ph_sleep(int sec)
+// {
+// 	usleep(sec * 1000000);
+// }//TODO REMOVE
+
 int	run(t_data *data)
 {
 	int i;
@@ -66,10 +73,12 @@ int	run(t_data *data)
 		}
 		i++;
 	}
-	while (!data->philo_die)
+	while (1)
 	{
-		
+		pthread_mutex_lock(&data->data_rw);
+		if (!data->philo_die)
+			break ;
+		pthread_mutex_unlock(&data->data_rw);
 	}
-	
 	return (EXIT_SUCCESS);
 }

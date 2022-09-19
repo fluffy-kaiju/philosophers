@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/19 11:39:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/19 13:51:57 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static int	philo_data_constructor(int nb, t_data *data)
 		i++;
 	}
 	//TODO REMOVE DEBUG
-	for (int i = 0; i < data->nb_philo; i++)
-		printf("[%p]->[%p]\n", &table[i].fork, table[i].next);
+	// for (int i = 0; i < data->nb_philo; i++)
+	// 	printf("[%p]->[%p]\n", &table[i].fork, table[i].next);
 	return (EXIT_SUCCESS);
 }
 
@@ -123,7 +123,7 @@ int	init_data(int ac, char **av, t_data *data)
 		philo_exit(EXIT_FAILURE, PH_MUTALLOC, data);
 		return (EXIT_FAILURE);
 	}
-	if (pthread_mutex_init(&data->print_stdout_rw, NULL))
+	if (pthread_mutex_init(&data->print_stdout, NULL))
 	{
 		philo_exit(EXIT_FAILURE, PH_MUTALLOC, data);
 		return (EXIT_FAILURE);

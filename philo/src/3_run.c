@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/19 11:41:05 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/19 13:56:12 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	luncher(t_data *data, int odd)
 	{
 		if ((i % 2) == odd)
 		{
-			printf("INFO: try to create philo[%d] thread\n", i);
+			// printf("INFO: try to create philo[%d] thread\n", i);//TODO REMOVE 
 			if (create_thread(&data->table[i]))
 				return (EXIT_FAILURE);
 		}
@@ -58,7 +58,7 @@ int	run(t_data *data)
 {
 	int i;
 
-	if (luncher(data, 1) || luncher(data, 0))
+	if (luncher(data, 0) || luncher(data, 1))
 	{
 		philo_exit(EXIT_FAILURE, "create_thread fail !\n", data);
 		return (EXIT_FAILURE);
@@ -76,7 +76,7 @@ int	run(t_data *data)
 	while (1)
 	{
 		pthread_mutex_lock(&data->data_rw);
-		if (!data->philo_die)
+		if (data->philo_die)
 			break ;
 		pthread_mutex_unlock(&data->data_rw);
 	}

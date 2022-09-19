@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/19 11:39:10 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/19 13:51:38 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_philo
 {
 	pthread_t			thread;
 	pthread_mutex_t		fork;
-	long				last_meal;
+	long				death_date;
 	int					nb_eat;
 	int					num;
 	pthread_mutex_t		*next;
@@ -57,8 +57,7 @@ typedef struct s_data
 	int				philo_die;
 	int				philo_error;
 	pthread_mutex_t	data_rw;
-	pthread_mutex_t	print_stdout_rw;
-	int				print_stdout;
+	pthread_mutex_t	print_stdout;
 }				t_data;
 
 void	philo_exit(int error, char *msg, t_data *data);

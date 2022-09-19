@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/19 14:02:42 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/19 15:24:56 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static long	msec_constructor(long sec, int usec)
 static long	gettime(struct timeval *time)
 {
 	if (gettimeofday(time, NULL))
-		return (EXIT_SUCCESS);
+		return (0);
 	return (msec_constructor(time->tv_sec, time->tv_usec));
 }
 
@@ -52,7 +52,30 @@ static int	ph_print(char *msg, t_philo *me)
 
 static int	ph_sleep(int ms)
 {
-	return (usleep(ms * 1000));
+	long 			end_time;
+	long 			time;
+	struct timeval	t;
+	end_time = gettime(&t);
+	if (!end_time)
+		return (EXIT_FAILURE);
+	end_time += (ms);
+	// printf("sleep[%d][%lu]\n", ms, (long)((ms * 1000) * 0.8));
+	if (usleep((ms * 1000) * 0.8))
+		return (EXIT_FAILURE);
+	time = gettime(&t);
+	if (!time)
+		return (EXIT_FAILURE);
+	// write(1, "sleep0\n", 8);
+	while (time < end_time)
+	{
+		// printf("time[%lu] < end_time[%lu]\n", time, end_time);
+		usleep(1000);
+		time = gettime(&t);
+		if (!time)
+			return (EXIT_FAILURE);
+	}
+	// write(1, "sleep1\n", 8);
+	return (EXIT_SUCCESS);
 }
 
 static int	get_death_date(t_philo *me)
@@ -80,7 +103,7 @@ static int	ph_death(t_philo *me)
 	if (pthread_mutex_lock(&me->data->data_rw))
 		return (EXIT_FAILURE);
 	me->data->philo_die = 1;
-	write(1, "====== DEATH =======\n", 22);//TODO REMOVE
+	// write(1, "====== DEATH =======\n", 22);//TODO REMOVE
 	if (pthread_mutex_unlock(&me->data->data_rw))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -128,12 +151,7 @@ void	*philo_routine(void *this)
 		
 		// write(1, "DEBUG3\n", 7);
 		
-		if (check_death_date(me))
-			return (NULL);
-		
-		// write(1, "DEBUG4\n", 7);
-		
-		if (take_fork(me, me->next))
+		if (check_death_date(me) || take_fork(me, me->next))
 			return (NULL);
 		
 		// write(1, "DEBUG5\n", 7);

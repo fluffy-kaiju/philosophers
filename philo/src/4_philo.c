@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/19 15:24:56 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/19 15:43:21 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	ph_sleep(int ms)
 	while (time < end_time)
 	{
 		// printf("time[%lu] < end_time[%lu]\n", time, end_time);
-		usleep(1000);
+		usleep(100);
 		time = gettime(&t);
 		if (!time)
 			return (EXIT_FAILURE);
@@ -98,13 +98,18 @@ static int take_fork(t_philo *me, pthread_mutex_t *ph_fork)
 	return (EXIT_SUCCESS);
 }
 
-static int	ph_death(t_philo *me)
+static int	ph_death(t_philo *me, long time)
 {
 	if (pthread_mutex_lock(&me->data->data_rw))
 		return (EXIT_FAILURE);
+	if (pthread_mutex_lock(&me->data->print_stdout))
+		return (EXIT_FAILURE);
+	if (!me->data->philo_die)
+		printf("%lu %d %s\n", time, me->num, PH_DEATH);
 	me->data->philo_die = 1;
-	// write(1, "====== DEATH =======\n", 22);//TODO REMOVE
 	if (pthread_mutex_unlock(&me->data->data_rw))
+		return (EXIT_FAILURE);
+	if (pthread_mutex_unlock(&me->data->print_stdout))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -117,7 +122,7 @@ static int	check_death_date(t_philo *me)
 	if (!time)
 		return (EXIT_FAILURE);
 	if (time > me->death_date)
-		if (ph_death(me))
+		if (ph_death(me, time))
 			return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -139,47 +144,29 @@ void	*philo_routine(void *this)
 	me = this;
 	while (1)
 	{
-		// write(1, "DEBUG1\n", 7);
-
 		if (get_death_date(me))
 			return (NULL);
-		
-		// write(1, "DEBUG2\n", 7);
 		
 		if (ph_print(PH_THINK, me) || take_fork(me, &me->fork))
 			return (NULL);
 		
-		// write(1, "DEBUG3\n", 7);
-		
 		if (check_death_date(me) || take_fork(me, me->next))
 			return (NULL);
 		
-		// write(1, "DEBUG5\n", 7);
-		
 		if (check_death_date(me))
 			return (NULL);
-		
-		// write(1, "DEBUG6\n", 7);
 		
 		if (ph_eat(me))
 			return (NULL);
 		
-		// write(1, "DEBUG7\n", 7);
-		
 		if (check_death_date(me))
 			return (NULL);
-		
-		// write(1, "DEBUG8\n", 7);
 		
 		if (ph_print(PH_SLEEP, me) || ph_sleep(me->time_eat))
 			return (NULL);
 		
-		// write(1, "DEBUG9\n", 7);
-		
 		if (check_death_date(me))
 			return (NULL);
-		
-		// write(1, "DEBUG10\n", 6);
 	}
 	return (EXIT_SUCCESS);
 }

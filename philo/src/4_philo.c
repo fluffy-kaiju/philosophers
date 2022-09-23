@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/19 15:43:21 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/23 14:53:54 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ static int	ph_print(char *msg, t_philo *me)
 		return (EXIT_FAILURE);
 	if (!me->data->philo_die)
 	{
-		if (pthread_mutex_lock(&me->data->print_stdout))
-			return (EXIT_FAILURE);
+		// if (pthread_mutex_lock(&me->data->print_stdout))
+		// 	return (EXIT_FAILURE);
 		printf("%lu %d %s\n", ret, me->num, msg);
-		if (pthread_mutex_unlock(&me->data->print_stdout))
-			return (EXIT_FAILURE);
+		// if (pthread_mutex_unlock(&me->data->print_stdout))
+		// 	return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_unlock(&me->data->data_rw))
 		return (EXIT_FAILURE);
@@ -133,6 +133,8 @@ static int	ph_eat(t_philo *me)
 	if (ph_print(PH_EAT, me) || ph_sleep(me->time_eat))
 		return (EXIT_FAILURE);
 	if (pthread_mutex_unlock(&me->fork) || pthread_mutex_unlock(me->next))
+		return (EXIT_FAILURE);
+	if (get_death_date(me))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

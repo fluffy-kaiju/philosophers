@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/19 13:56:12 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/23 15:00:35 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "ph_debug.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 
 void	*philo_routine(void *this);
 
@@ -44,6 +45,7 @@ static int	luncher(t_data *data, int odd)
 		}
 		i++;
 	}
+	usleep(500);
 	return (EXIT_SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/19 13:51:38 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/23 14:41:24 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # define PH_ORVERFLO "arg int overflow !\n"
 # define PH_MUTALLOC "pthread_mutex_init alloc fail !\n"
 
-# define PH_FORK "has taken a fork"
+// # define PH_FORK "has taken a fork"
+# define PH_FORK "is forking"
 # define PH_EAT "is eating"
 # define PH_SLEEP "is sleeping"
 # define PH_THINK "is thinking"

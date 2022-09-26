@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/26 15:03:31 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:33:52 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ void	*philo_routine(void *this);
 
 static int	create_thread(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->start);//TODO CHECK RETURN
+	if (pthread_mutex_lock(&philo->start))
+		return (EXIT_FAILURE);
 	if (pthread_create(&philo->thread, NULL, &philo_routine, philo))
 	{
-		philo_exit(EXIT_FAILURE, "phtread_create fail !", philo->data);
+		ph_exit_msg(EXIT_FAILURE, "phtread_create fail !");
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -36,6 +37,7 @@ static int	create_thread(t_philo *philo)
 static int	luncher(t_data *data)
 {
 	int	i;
+
 	i = 0;
 	while (i < data->nb_philo)
 	{
@@ -71,37 +73,33 @@ static int	start_philo(t_data *data, int odd)
 
 int	run(t_data *data)
 {
-	int i;
+	int tmp;
 
-	i = 0;
-	if (luncher(data))
+	if (luncher(data) || start_philo(data, 0) || start_philo(data, 1))
 	{
-		philo_exit(EXIT_FAILURE, "create_thread fail !\n", data);
-		return (EXIT_FAILURE);
-	}
-	if (start_philo(data, 0) || start_philo(data, 1))
-	{
-		philo_exit(EXIT_FAILURE, "start_philo fail !\n", data);
+		ph_exit_msg(EXIT_FAILURE, "create_thread fail !\n");
 		return (EXIT_FAILURE);
 	}
 	while (1)
 	{
-		pthread_mutex_lock(&data->data_rw);//TODO CHECK RETURN
-		if (data->philo_die)
-		{
-			pthread_mutex_unlock(&data->data_rw);//TODO CHECK RETURN
+		if (pthread_mutex_lock(&data->data_rw))
+			return (EXIT_FAILURE);
+		tmp = data->philo_die;
+		if (pthread_mutex_unlock(&data->data_rw))
+			return (EXIT_FAILURE);
+		if (tmp)
 			break ;
-		}
-		pthread_mutex_unlock(&data->data_rw);//TODO CHECK RETURN
 	}
-	while (i < data->nb_philo)
+	tmp = 0;
+	while (tmp < data->nb_philo)
 	{
-		if (pthread_join(data->table[i].thread, NULL))
+		if (pthread_join(data->table[tmp].thread, NULL))
 		{
-			philo_exit(EXIT_FAILURE, "pthread_join fail !\n", data);
+			ph_exit_msg(EXIT_FAILURE, "pthread_join fail !\n");
 			return (EXIT_FAILURE);
 		}
-		i++;
+		printf("INFO: try to join philo[%d] thread\n", tmp);//TODO REMOVE
+		tmp++;
 	}
 	return (EXIT_SUCCESS);
 }

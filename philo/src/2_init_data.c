@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/26 13:32:08 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:30:59 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	mutex_init(t_data *data)
 			printf("INFO: init mutext for t_philo [%d]\n", x);
 		if (pthread_mutex_init(&data->table[x].fork, NULL))
 		{
-			philo_exit(EXIT_FAILURE, "pthread_mutex_init fail !\n", data);
+			ph_exit_msg(EXIT_FAILURE, "pthread_mutex_init fail !\n");
 			return (EXIT_FAILURE);
 		}
 		x++;
@@ -61,7 +61,7 @@ static int	philo_data_constructor(int nb, t_data *data)
 	data->table = ft_calloc(sizeof(t_philo) * nb);
 	if (!data->table)
 	{
-		philo_exit(EXIT_FAILURE, "data->table alloc fail.\n", data);
+		ph_exit_msg(EXIT_FAILURE, "data->table alloc fail.\n");
 		return (EXIT_FAILURE);
 	}
 	table = data->table;
@@ -79,14 +79,11 @@ static int	philo_data_constructor(int nb, t_data *data)
 		table[get_index(i, nb)].nb_must_eat = data->nb_must_eat;
 		if (pthread_mutex_init(&table[get_index(i, nb)].start, NULL))
 		{
-			philo_exit(EXIT_FAILURE, PH_MUTALLOC, data);
+			ph_exit_msg(EXIT_FAILURE, PH_MUTALLOC);
 			return (EXIT_FAILURE);
 		}
 		i++;
 	}
-	//TODO REMOVE DEBUG
-	// for (int i = 0; i < data->nb_philo; i++)
-	// 	printf("[%p]->[%p]\n", &table[i].fork, table[i].next);
 	return (EXIT_SUCCESS);
 }
 
@@ -105,12 +102,12 @@ int	argtoint(int ac, char **av, t_data *data)
 		overflow += ft_atoi_strict(av[4], &data->nb_must_eat);
 	if (overflow)
 	{
-		philo_exit(EXIT_FAILURE, PH_ORVERFLO, data);
+		ph_exit_msg(EXIT_FAILURE, PH_ORVERFLO);
 		return (EXIT_FAILURE);
 	}
 	if (data->nb_philo < 1)
 	{
-		philo_exit(EXIT_FAILURE, PH_ONEPHILO, data);
+		ph_exit_msg(EXIT_FAILURE, PH_ONEPHILO);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -125,12 +122,12 @@ int	init_data(int ac, char **av, t_data *data)
 		return (EXIT_FAILURE);
 	if (pthread_mutex_init(&data->data_rw, NULL))
 	{
-		philo_exit(EXIT_FAILURE, PH_MUTALLOC, data);
+		ph_exit_msg(EXIT_FAILURE, PH_MUTALLOC);
 		return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_init(&data->print_stdout, NULL))
 	{
-		philo_exit(EXIT_FAILURE, PH_MUTALLOC, data);
+		ph_exit_msg(EXIT_FAILURE, PH_MUTALLOC);
 		return (EXIT_FAILURE);
 	}
 	if (PH_DEBUG)

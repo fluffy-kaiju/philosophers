@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:58:39 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 16:50:34 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:29:24 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,14 @@ static void	struct_to_null(void *data, int size)
 int	main(int ac, char **av)
 {
 	t_data	data;
+	int		return_value;
 
+	return_value = EXIT_SUCCESS;
 	ac--;
 	av++;
 	struct_to_null(&data, sizeof(t_data));
 	if (parser(ac, av, &data) || init_data(ac, av, &data) || run(&data))//TODO make all function return error
-	{
-		philo_exit(EXIT_FAILURE, NULL, &data);
-		return (EXIT_FAILURE);
-	}
-	philo_exit(EXIT_SUCCESS, NULL, &data);
-	return (EXIT_SUCCESS);
+		return_value = EXIT_FAILURE;
+	philo_free(&data);
+	return (return_value);
 }

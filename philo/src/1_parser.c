@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 13:01:22 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/15 17:04:12 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:46:28 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_isdigit(int c);
  * @brief Check if all input are positif number, if not will exit with a error
  *        message.
  */
-static int	arg_check(int ac, char **av, t_data *data)
+static int	arg_check(int ac, char **av)
 {
 	int	x;
 	int	y;
@@ -34,8 +34,8 @@ static int	arg_check(int ac, char **av, t_data *data)
 		{
 			if (!ft_isdigit(av[x][y]))
 			{
-				philo_exit(EXIT_FAILURE, "non digit character or "
-					"negative number in arg.\n", data);
+				ph_exit_msg(EXIT_FAILURE, "non digit character or "
+					"negative number in arg.\n");
 				return (EXIT_FAILURE);
 			}
 			y++;
@@ -50,14 +50,14 @@ static int	arg_check(int ac, char **av, t_data *data)
  * @brief Will skip the first `ac` and `av` arg. Check if the args are only
  *        digit character and populate the data struct.
  */
-int	parser(int ac, char **av, t_data *data)
+int	parser(int ac, char **av)
 {
 	if (!(ac == 4 || ac == 5))
 	{
-		philo_exit(EXIT_FAILURE, PH_BADARG1 PH_BADARG2, data);
+		ph_exit_msg(EXIT_FAILURE, PH_BADARG1 PH_BADARG2);
 		return (EXIT_FAILURE);
 	}
-	if (arg_check(ac, av, data))
+	if (arg_check(ac, av))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

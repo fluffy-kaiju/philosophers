@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/23 14:53:54 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/26 12:50:19 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void	*philo_routine(void *this)
 	t_philo *me;
 
 	me = this;
+	pthread_mutex_lock(&me->start);
 	while (1)
 	{
 		if (get_death_date(me))

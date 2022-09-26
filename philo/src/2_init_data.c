@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/19 13:51:57 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/26 12:50:07 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ static int	philo_data_constructor(int nb, t_data *data)
 		table[get_index(i, nb)].time_eat = data->time_eat;
 		table[get_index(i, nb)].time_sleep = data->time_sleep;
 		table[get_index(i, nb)].nb_must_eat = data->nb_must_eat;
+		if (pthread_mutex_init(&table[get_index(i, nb)].start, NULL))
+		{
+			philo_exit(EXIT_FAILURE, PH_MUTALLOC, data);
+			return (EXIT_FAILURE);
+		}
 		i++;
 	}
 	//TODO REMOVE DEBUG

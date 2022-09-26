@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/23 15:00:35 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/26 12:51:06 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*philo_routine(void *this);
 
 static int	create_thread(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->start);
 	if (pthread_create(&philo->thread, NULL, &philo_routine, philo))
 	{
 		philo_exit(EXIT_FAILURE, "phtread_create fail !", philo->data);
@@ -68,6 +69,7 @@ int	run(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)//TODO check if we use join or detach thread
 	{
+		pthread_mutex_unlock(&data->table[i].start);//TODO TEST TO REMOVE
 		if (pthread_detach(data->table[i].thread))
 		{
 			philo_exit(EXIT_FAILURE, "pthread_join fail !\n", data);

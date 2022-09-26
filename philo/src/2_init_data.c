@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/26 12:50:07 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/26 13:32:08 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,8 @@ int	init_data(int ac, char **av, t_data *data)
 	if (PH_DEBUG)
 	{
 		printf("nb_philo    [%d]\ntime_die    [%d]\n"
-			"time_sleep  [%d]\nnb_must_eat [%d]\n",
-			data->nb_philo, data->time_die, data->time_sleep,
+			"time_sleep  [%d]\ntime_eat [%d]\nnb_must_eat [%d]\n",
+			data->nb_philo, data->time_die, data->time_sleep, data->time_eat,
 			data->nb_must_eat);
 	}
 	if (philo_data_constructor(data->nb_philo, data))

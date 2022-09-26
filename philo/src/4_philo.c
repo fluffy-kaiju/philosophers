@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/26 12:50:19 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/26 12:56:38 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,28 +147,17 @@ void	*philo_routine(void *this)
 	pthread_mutex_lock(&me->start);
 	while (1)
 	{
-		if (get_death_date(me))
-			return (NULL);
-		
-		if (ph_print(PH_THINK, me) || take_fork(me, &me->fork))
-			return (NULL);
-		
-		if (check_death_date(me) || take_fork(me, me->next))
-			return (NULL);
-		
-		if (check_death_date(me))
-			return (NULL);
-		
-		if (ph_eat(me))
-			return (NULL);
-		
-		if (check_death_date(me))
-			return (NULL);
-		
-		if (ph_print(PH_SLEEP, me) || ph_sleep(me->time_eat))
-			return (NULL);
-		
-		if (check_death_date(me))
+		if (get_death_date(me)
+			|| ph_print(PH_THINK, me)
+			|| take_fork(me, &me->fork)
+			|| check_death_date(me)
+			|| take_fork(me, me->next)
+			|| check_death_date(me)
+			|| ph_eat(me)
+			|| check_death_date(me)
+			|| ph_print(PH_SLEEP, me)
+			|| ph_sleep(me->time_eat)
+			|| check_death_date(me))
 			return (NULL);
 	}
 	return (EXIT_SUCCESS);

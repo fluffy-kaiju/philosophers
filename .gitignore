@@ -56,3 +56,4 @@ philo/include/*
 .vscode/settings.json
 philo/log
 .$Logic.drawio.dtmp
+test.sh

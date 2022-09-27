@@ -6,7 +6,7 @@
 #    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 08:35:24 by mahadad           #+#    #+#              #
-#    Updated: 2022/09/26 12:38:40 by mahadad          ###   ########.fr        #
+#    Updated: 2022/09/27 14:05:20 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -226,7 +226,7 @@ ping_lib:
 git:
 	@git pull
 	@git diff
-	@-git add .
+	@git add -A
 	@git commit -am "Makefile push `date +'%Y-%m-%d %H:%M:%S'`"
 	@-git push
 

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:58:39 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/26 15:29:24 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/27 11:41:54 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 #include "philo.h"
 
-int parser(int ac, char **av, t_data *data);
+int	parser(int ac, char **av, t_data *data);
 int	init_data(int ac, char **av, t_data *data);
 int	run(t_data *data);
 

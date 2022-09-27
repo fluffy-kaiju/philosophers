@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/26 15:30:59 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/27 11:43:12 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ static int	philo_data_constructor(int nb, t_data *data)
 }
 
 /**
- * @brief Use ft_atoi to convert
+ * @brief Use ft_atoi_strict to convert, will return a error if one value will
+ *        overflow `int`.
  */
 int	argtoint(int ac, char **av, t_data *data)
 {

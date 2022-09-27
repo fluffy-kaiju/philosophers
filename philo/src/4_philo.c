@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/27 14:01:51 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:56:27 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ static int	set_death_date(t_philo *me)
 	me->death_date = time + me->time_die;
 	return (EXIT_SUCCESS);
 }
+
+static int	ph_print(char *msg, t_philo *me);
+
 /**
  * @brief Compare the actual time with the `me->death_date`, return `1` if the
  *        death_date have been exeeded else return `0`.
@@ -47,18 +50,46 @@ static int	set_death_date(t_philo *me)
  *                 time.
  * @return int `EXIT_FAILURE` if the phlilo is death otherwise `EXIT_SUCCESS`.
  */
-static int	check_death(t_philo *me, long override)
+static int	is_death(t_philo *me, long override)
 {
 	long			time;
 	struct timeval	t;
 
-	if (override)
+	if (!override)
 		time = gettime(&t);
 	else
 		time = override;
 	if (!time)
 		return (EXIT_FAILURE);
+	if (pthread_mutex_lock(&me->data->data_rw))
+		return (EXIT_FAILURE);
 	if (time > me->death_date)
+	{
+		if (!me->data->philo_die)
+			printf("%lu %d %s\n", time, me->num, PH_DEATH);
+		me->data->philo_die = 1;
+		if (pthread_mutex_unlock(&me->data->data_rw))
+			return (EXIT_FAILURE);
+		return (EXIT_FAILURE);
+	}
+	if (pthread_mutex_unlock(&me->data->data_rw))
+			return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+static int	ph_print(char *msg, t_philo *me)
+{
+	long time;
+	struct timeval	t;
+
+	time = gettime(&t);
+	if (!time)
+		return (EXIT_FAILURE);
+	if (pthread_mutex_lock(&me->data->print_stdout))
+		return (EXIT_FAILURE);
+	if (!is_death(me, time))
+		printf("%lu %d %s\n", time, me->num, msg);
+	if (pthread_mutex_unlock(&me->data->print_stdout))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -77,7 +108,7 @@ static int	msleep(int ms, t_philo *me)
 	{
 		usleep(100);
 		time = gettime(&t);
-		if (!time || check_death(me, time))
+		if (!time || is_death(me, time))
 			return (EXIT_FAILURE);
 		if (time > end_time)
 			break ;
@@ -91,14 +122,11 @@ void	*philo_routine(void *this)
 
 	me = this;
 	set_death_date(me);
-	msleep(5000, me);
 	pthread_mutex_lock(&me->start);
-	printf("philo[%d] running\n", me->num);
 	while (1)
 	{
-		if (check_death(me, 0))
+		if (is_death(me, 0))
 			break ;
 	}
-	printf("philo[%d] died\n", me->num);
 	return (NULL);
 }

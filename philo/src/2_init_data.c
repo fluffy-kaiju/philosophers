@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/27 11:43:12 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:45:18 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ static int	mutex_init(t_data *data)
 			printf("INFO: init mutext for t_philo [%d]\n", x);
 		if (pthread_mutex_init(&data->table[x].fork, NULL))
 		{
-			ph_exit_msg(EXIT_FAILURE, "pthread_mutex_init fail !\n");
+			ph_exit_msg(EXIT_FAILURE, PH_MUTALLOC);
+			return (EXIT_FAILURE);
+		}
+		if (pthread_mutex_init(&data->table[x].start, NULL))
+		{
+			ph_exit_msg(EXIT_FAILURE, PH_MUTALLOC);
 			return (EXIT_FAILURE);
 		}
 		x++;
@@ -77,11 +82,6 @@ static int	philo_data_constructor(int nb, t_data *data)
 		table[get_index(i, nb)].time_eat = data->time_eat;
 		table[get_index(i, nb)].time_sleep = data->time_sleep;
 		table[get_index(i, nb)].nb_must_eat = data->nb_must_eat;
-		if (pthread_mutex_init(&table[get_index(i, nb)].start, NULL))
-		{
-			ph_exit_msg(EXIT_FAILURE, PH_MUTALLOC);
-			return (EXIT_FAILURE);
-		}
 		i++;
 	}
 	return (EXIT_SUCCESS);

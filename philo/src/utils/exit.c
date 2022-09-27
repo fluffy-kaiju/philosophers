@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:41:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/26 15:27:51 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:53:28 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,6 @@ static size_t	strlen_protect(const char *s)
 /**
  * @brief 
  * 
- */
-void	philo_free(t_data *data)
-{
-	free (data->table);
-}
-
-/**
- * @brief 
- * 
  * @param error 
  * @param msg 
  * @param data 
@@ -53,4 +44,20 @@ void	ph_exit_msg(int error, const char *msg)
 			write(STDERR_FILENO, msg, strlen_protect(msg));
 		}
 	}
+}
+
+void	philo_free(t_data *data)
+{
+	int	i;
+
+	pthread_mutex_destroy(&data->data_rw);
+	pthread_mutex_destroy(&data->print_stdout);
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		pthread_mutex_destroy(&data->table[i].fork);
+		pthread_mutex_destroy(&data->table[i].start);
+		i++;
+	}
+	free (data->table);
 }

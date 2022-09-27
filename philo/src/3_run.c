@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/27 14:02:43 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/27 15:56:07 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	create_thread(t_philo *philo)
 		return (EXIT_FAILURE);
 	if (pthread_create(&philo->thread, NULL, &philo_routine, philo))
 	{
-		ph_exit_msg(EXIT_FAILURE, "phtread_create fail !");
+		ph_exit_msg(EXIT_FAILURE, "phtread_create fail !\n");
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -41,7 +41,8 @@ static int	luncher(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		printf("INFO: try to create philo[%d] thread\n", i);//TODO REMOVE 
+		if (PH_DEBUG)
+			printf("INFO: try to create philo[%d] thread\n", i);//TODO REMOVE 
 		if (create_thread(&data->table[i]))
 			return (EXIT_FAILURE);
 		i++;
@@ -62,7 +63,8 @@ static int	start_philo(t_data *data, int odd)
 	{
 		if ((i % 2) == odd)
 		{
-			printf("INFO: try to start philo[%d] thread\n", i);//TODO REMOVE 
+			if (PH_DEBUG)
+				printf("INFO: try to start philo[%d] thread\n", i);//TODO REMOVE 
 			if (pthread_mutex_unlock(&data->table[i].start))
 				return (EXIT_FAILURE);
 		}
@@ -84,7 +86,8 @@ static int	philo_join(t_data *data)
 			ph_exit_msg(EXIT_FAILURE, "pthread_join fail !\n");
 			return (EXIT_FAILURE);
 		}
-		printf("INFO: try to join philo[%d] thread\n", x);//TODO REMOVE
+		if (PH_DEBUG)
+			printf("INFO: try to join philo[%d] thread\n", x);//TODO REMOVE
 		x++;
 	}
 	return (EXIT_SUCCESS);

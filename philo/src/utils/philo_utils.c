@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/27 16:21:59 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/27 17:06:43 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,21 @@ int	is_death(t_philo *me, long override)
 		time = override;
 	if (!time)
 		return (EXIT_FAILURE);
-	if (pthread_mutex_lock(&me->data->data_rw))
-		return (EXIT_FAILURE);
 	if (time > me->death_date)
 	{
+		if (pthread_mutex_lock(&me->data->data_rw))
+			return (EXIT_FAILURE);
+		if (pthread_mutex_lock(&me->data->print_stdout))
+			return (EXIT_FAILURE);
 		if (!me->data->philo_die)
 			printf("%lu %d %s\n", time, me->num, PH_DEATH);
 		me->data->philo_die = 1;
+		if (pthread_mutex_unlock(&me->data->print_stdout))
+			return (EXIT_FAILURE);
 		if (pthread_mutex_unlock(&me->data->data_rw))
 			return (EXIT_FAILURE);
 		return (EXIT_FAILURE);
 	}
-	if (pthread_mutex_unlock(&me->data->data_rw))
-		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -80,8 +82,12 @@ int	ph_print(char *msg, t_philo *me)
 		return (EXIT_FAILURE);
 	if (pthread_mutex_lock(&me->data->print_stdout))
 		return (EXIT_FAILURE);
-	if (!is_death(me, time))
+	if (pthread_mutex_lock(&me->data->data_rw))
+		return (EXIT_FAILURE);
+	if (!me->data->philo_die)
 		printf("%lu %d %s\n", time, me->num, msg);
+	if (pthread_mutex_unlock(&me->data->data_rw))
+		return (EXIT_FAILURE);
 	if (pthread_mutex_unlock(&me->data->print_stdout))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

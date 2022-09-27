@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/27 13:43:21 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/27 16:01:12 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # define PH_ORVERFLO "arg int overflow !\n"
 # define PH_MUTALLOC "pthread_mutex_init alloc fail !\n"
 
-// # define PH_FORK "has taken a fork"
-# define PH_FORK "is forking"
+# define PH_FORK "has taken a fork"
+// # define PH_FORK "is forking"
 # define PH_EAT "is eating"
 # define PH_SLEEP "is sleeping"
 # define PH_THINK "is thinking"
@@ -40,7 +40,6 @@ typedef struct s_philo
 	int					num;
 	pthread_mutex_t		*next;
 	t_data				*data;
-	// struct timeval		time;
 	int					time_eat;
 	int					time_die;
 	int					time_sleep;
@@ -64,5 +63,10 @@ typedef struct s_data
 
 void	ph_exit_msg(int error, const char *msg);
 void	philo_free(t_data *data);
+long	gettime(struct timeval *time);
+int		set_death_date(t_philo *me);
+int		is_death(t_philo *me, long override);
+int		ph_print(char *msg, t_philo *me);
+int		msleep(int ms, t_philo *me);
 
 #endif /* PHILO_H */

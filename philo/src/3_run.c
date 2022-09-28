@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/27 15:56:07 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/28 13:31:14 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	start_philo(t_data *data, int odd)
 		}
 		i++;
 	}
-	usleep(500);
+	// usleep(500);
 	return (EXIT_SUCCESS);
 }
 
@@ -112,6 +112,8 @@ int	run(t_data *data)
 		if (tmp)
 			break ;
 	}
+	if (PH_DEBUG)
+		printf("INFO: data->philo_die true !\n");
 	if (philo_join(data))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

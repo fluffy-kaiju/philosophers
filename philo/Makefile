@@ -6,7 +6,7 @@
 #    By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/09 08:35:24 by mahadad           #+#    #+#              #
-#    Updated: 2022/09/27 14:05:20 by mahadad          ###   ########.fr        #
+#    Updated: 2022/09/28 13:28:24 by mahadad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ SANI		= 0
 WRA			= 0
 
 ifeq ($(SANI), 1)
-	FLAGS += -fsanitize=address
+	FLAGS += -fsanitize=thread
 	DEBUG = 1
 	MAKE_FLAG += SANI=1
 endif

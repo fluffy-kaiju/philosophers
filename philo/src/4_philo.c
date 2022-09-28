@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/27 17:07:06 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/28 13:26:53 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@
 
 static int	take_fork(t_philo *me, pthread_mutex_t *ph_fork)
 {
-	if (is_death(me, 0)
-		|| pthread_mutex_lock(ph_fork)
-		|| is_death(me, 0)
-		|| ph_print(PH_FORK, me))
+	if (pthread_mutex_lock(ph_fork) || ph_print(PH_FORK, me))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -36,7 +33,7 @@ static int	eat(t_philo *me)
 	ph_print(PH_THINK, me);
 	if (&me->fork == me->next)
 	{
-		if (msleep(me->time_die, me))
+		if (msleep(me->time_die, me, 1))
 			return (EXIT_FAILURE);
 		return (EXIT_SUCCESS);
 	}
@@ -45,11 +42,13 @@ static int	eat(t_philo *me)
 		|| take_fork(me, me->next)
 		|| is_death(me, 0)
 		|| ph_print(PH_EAT, me)
-		|| msleep(me->time_eat, me)
+		|| msleep(me->time_eat, me, 0)
 		|| set_death_date(me)
 		|| pthread_mutex_unlock(&me->fork)
 		|| pthread_mutex_unlock(me->next))
-		return (EXIT_FAILURE);
+		{
+			return (EXIT_FAILURE);
+		}
 	return (EXIT_SUCCESS);
 }
 
@@ -68,7 +67,7 @@ void	*philo_routine(void *this)
 		if (eat(me))
 			break ;
 		if (ph_print(PH_SLEEP, me)
-			|| msleep(me->time_sleep, me))
+			|| msleep(me->time_sleep, me, 1))
 			break ;
 	}
 	return (NULL);

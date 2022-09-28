@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/28 13:26:53 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/28 14:27:54 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ static int	take_fork(t_philo *me, pthread_mutex_t *ph_fork)
  * one thread.
  * 
  */
-static int	eat(t_philo *me)
+static int	run(t_philo *me)
 {
-	ph_print(PH_THINK, me);
-	if (&me->fork == me->next)
+	if (is_death(me, 0) || ph_print(PH_THINK, me) || &me->fork == me->next)
 	{
 		if (msleep(me->time_die, me, 1))
 			return (EXIT_FAILURE);
@@ -42,10 +41,13 @@ static int	eat(t_philo *me)
 		|| take_fork(me, me->next)
 		|| is_death(me, 0)
 		|| ph_print(PH_EAT, me)
-		|| msleep(me->time_eat, me, 0)
-		|| set_death_date(me)
+		|| msleep(me->time_eat, me, 1)
 		|| pthread_mutex_unlock(&me->fork)
-		|| pthread_mutex_unlock(me->next))
+		|| pthread_mutex_unlock(me->next)
+		|| set_death_date(me)
+		|| is_death(me, 0)
+		|| ph_print(PH_SLEEP, me)
+		|| msleep(me->time_sleep, me, 1))
 		{
 			return (EXIT_FAILURE);
 		}
@@ -57,18 +59,16 @@ void	*philo_routine(void *this)
 	t_philo	*me;
 
 	me = this;
-	if (set_death_date(me))
+	if (pthread_mutex_lock(&me->start) || set_death_date(me))
 		return (NULL);
-	pthread_mutex_lock(&me->start);
 	while (1)
 	{
-		if (is_death(me, 0))
+		if (run(me))
+		{
+			printf("BREAK while[%d]\n", me->num);
 			break ;
-		if (eat(me))
-			break ;
-		if (ph_print(PH_SLEEP, me)
-			|| msleep(me->time_sleep, me, 1))
-			break ;
+		}
 	}
+	pthread_mutex_unlock(&me->start);
 	return (NULL);
 }

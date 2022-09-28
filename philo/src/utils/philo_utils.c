@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/28 13:35:58 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/28 14:55:54 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	set_death_date(t_philo *me)
 	if (!time)
 	{
 		if (PH_DEBUG)
-			printf("INFO: philo[%d]: set_death_date: gettime fail !\n", me->num);
+			printf("INFO: philo[%d]: set_death_date: gettime: fail !\n", me->num);
 		return (EXIT_FAILURE);
 	}
 	me->death_date = time + me->time_die;
@@ -68,7 +68,7 @@ int	is_death(t_philo *me, long override)
 		// if (pthread_mutex_lock(&me->data->print_stdout))
 			// return (EXIT_FAILURE);
 		if (!me->data->philo_die)
-			printf("is_death: %lu %d %s\n", time, me->num, PH_DEATH);
+			printf("%lu %d %s\n", time, me->num, PH_DEATH);
 		me->data->philo_die = 1;
 		// if (pthread_mutex_unlock(&me->data->print_stdout))
 			// return (EXIT_FAILURE);
@@ -105,22 +105,24 @@ int	msleep(int ms, t_philo *me, int check_death)
 	long			end_time;
 	long			time;
 	struct timeval	t;
-
+(void)check_death;
 	end_time = gettime(&t);
 	if (!end_time)
 		return (EXIT_FAILURE);
 	end_time += (ms);
+	if (usleep((ms * 1000) * 0.8))
+		return (EXIT_FAILURE);
 	while (1)
 	{
 		usleep(100);
 		time = gettime(&t);
-		if (!time || (check_death && is_death(me, time)))
+		if (!time/* || (check_death && is_death(me, time))*/)
 		{
 			if (PH_DEBUG)
 				printf("philo[%d] ms:%d die from msleep\n", me->num, ms);
 			return (EXIT_FAILURE);
 		}
-		if (time > end_time)
+		if (time > /*(*/end_time /*- 1)*/)
 			break ;
 	}
 	return (EXIT_SUCCESS);

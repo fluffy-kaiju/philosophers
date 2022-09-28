@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/28 14:55:54 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/28 15:13:37 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,9 @@ int	is_death(t_philo *me, long override)
 			ret += EXIT_FAILURE;
 	if (!ret && time > me->death_date)
 	{
-		// if (pthread_mutex_lock(&me->data->print_stdout))
-			// return (EXIT_FAILURE);
 		if (!me->data->philo_die)
 			printf("%lu %d %s\n", time, me->num, PH_DEATH);
 		me->data->philo_die = 1;
-		// if (pthread_mutex_unlock(&me->data->print_stdout))
-			// return (EXIT_FAILURE);
 		ret += EXIT_FAILURE;
 	}
 		if (pthread_mutex_unlock(&me->data->data_rw))
@@ -87,16 +83,14 @@ int	ph_print(char *msg, t_philo *me)
 	time = gettime(&t);
 	if (!time)
 		return (EXIT_FAILURE);
-	// if (pthread_mutex_lock(&me->data->print_stdout))
-		// return (EXIT_FAILURE);
-	if (pthread_mutex_lock(&me->data->data_rw))
+	if (pthread_mutex_lock(&me->data->data_rw)
+		|| pthread_mutex_lock(&me->data->print_stdout))
 		return (EXIT_FAILURE);
 	if (!me->data->philo_die)
 		printf("%lu %d %s\n", time, me->num, msg);
-	if (pthread_mutex_unlock(&me->data->data_rw))
+	if (pthread_mutex_unlock(&me->data->data_rw)
+		|| pthread_mutex_unlock(&me->data->print_stdout))
 		return (EXIT_FAILURE);
-	// if (pthread_mutex_unlock(&me->data->print_stdout))
-		// return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
@@ -114,15 +108,15 @@ int	msleep(int ms, t_philo *me, int check_death)
 		return (EXIT_FAILURE);
 	while (1)
 	{
-		usleep(100);
+		usleep(1);
 		time = gettime(&t);
-		if (!time/* || (check_death && is_death(me, time))*/)
+		if (!time || (check_death && is_death(me, time)))
 		{
 			if (PH_DEBUG)
 				printf("philo[%d] ms:%d die from msleep\n", me->num, ms);
 			return (EXIT_FAILURE);
 		}
-		if (time > /*(*/end_time /*- 1)*/)
+		if (time > (end_time - 1))
 			break ;
 	}
 	return (EXIT_SUCCESS);

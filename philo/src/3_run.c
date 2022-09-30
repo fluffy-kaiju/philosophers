@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/28 15:07:40 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/29 15:17:21 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ static int	create_thread(t_philo *philo)
 }
 
 /**
- * @brief Lunch philo thread. If `odd` == `0` start all even philo
- *        and if `odd` == `1` all odd philo.
+ * @brief Lunch all philo thread.
  */
-static int	luncher(t_data *data)
+static int	start_philo(t_data *data)
 {
 	int	i;
 
@@ -42,32 +41,9 @@ static int	luncher(t_data *data)
 	while (i < data->nb_philo)
 	{
 		if (PH_DEBUG)
-			printf("INFO: try to create philo[%d] thread\n", i + 1);//TODO REMOVE 
-		if (create_thread(&data->table[i]))
+			printf("INFO: try to start philo[%d] thread\n", i + 1);//TODO REMOVE 
+		if (pthread_mutex_unlock(&data->table[i].start))
 			return (EXIT_FAILURE);
-		i++;
-	}
-	return (EXIT_SUCCESS);
-}
-
-/**
- * @brief Lunch philo thread. If `odd` == `0` start all even philo
- *        and if `odd` == `1` all odd philo.
- */
-static int	start_philo(t_data *data, int odd)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		if ((i % 2) == odd)
-		{
-			if (PH_DEBUG)
-				printf("INFO: try to start philo[%d] thread\n", i + 1);//TODO REMOVE 
-			if (pthread_mutex_unlock(&data->table[i].start))
-				return (EXIT_FAILURE);
-		}
 		i++;
 	}
 	// usleep(500);
@@ -97,7 +73,7 @@ int	run(t_data *data)
 {
 	int	tmp;
 
-	if (luncher(data) || start_philo(data, 0) || start_philo(data, 1))
+	if (start_philo(data))
 	{
 		ph_exit_msg(EXIT_FAILURE, "create_thread fail !\n");
 		return (EXIT_FAILURE);

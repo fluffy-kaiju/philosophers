@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/28 15:23:12 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/29 16:00:39 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,18 @@ void	*philo_routine(void *this)
 	struct timeval t;
 
 	me = this;
-	while (1)
-		if (gettime(&t) >= me->time_start)
-			break ;
-	
-	if (/*pthread_mutex_lock(&me->start) || */set_death_date(me))
+	if (me->num % 2)
+		msleep(me->time_eat * 0.6, me, 0);
+	if (set_death_date(me))
 		return (NULL);
 	while (1)
 	{
 		if (run(me))
 		{
-			printf("BREAK while[%d][%lu\n", me->num, me->time_start);
+			printf("BREAK while[%d]\n", me->num);
 			break ;
 		}
 	}
-	pthread_mutex_unlock(&me->start);
 	printf("EXIT [%d]\n", me->num);
 	return (NULL);
 }

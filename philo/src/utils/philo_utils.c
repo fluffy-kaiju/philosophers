@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/28 15:13:37 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/29 15:28:47 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,14 @@ int	msleep(int ms, t_philo *me, int check_death)
 	long			end_time;
 	long			time;
 	struct timeval	t;
-(void)check_death;
+
 	end_time = gettime(&t);
 	if (!end_time)
 		return (EXIT_FAILURE);
 	end_time += (ms);
-	if (usleep((ms * 1000) * 0.8))
-		return (EXIT_FAILURE);
 	while (1)
 	{
-		usleep(1);
+		usleep(500);
 		time = gettime(&t);
 		if (!time || (check_death && is_death(me, time)))
 		{

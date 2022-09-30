@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/28 15:19:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/29 15:30:27 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ static int	philo_data_constructor(int nb, t_data *data)
 		table[get_index(i, nb)].next = &table[get_index(i + 1, nb)].fork;
 		table[get_index(i, nb)].num = i + 1;
 		table[get_index(i, nb)].data = data;
-		table[get_index(i, nb)].time_start = time + 2000;
 		table[get_index(i, nb)].time_die = data->time_die;
 		table[get_index(i, nb)].time_eat = data->time_eat;
 		table[get_index(i, nb)].time_sleep = data->time_sleep;

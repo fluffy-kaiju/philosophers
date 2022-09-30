@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:41:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/27 15:53:28 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/30 11:38:17 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	philo_free(t_data *data)
 	while (i < data->nb_philo)
 	{
 		pthread_mutex_destroy(&data->table[i].fork);
-		pthread_mutex_destroy(&data->table[i].start);
 		i++;
 	}
 	free (data->table);

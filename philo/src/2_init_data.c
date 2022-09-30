@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/29 15:30:27 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/30 11:35:35 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,6 @@ static int	mutex_init(t_data *data)
 		if (PH_DEBUG)
 			printf("INFO: init mutext for t_philo [%d]\n", x);
 		if (pthread_mutex_init(&data->table[x].fork, NULL))
-		{
-			ph_exit_msg(EXIT_FAILURE, PH_MUTALLOC);
-			return (EXIT_FAILURE);
-		}
-		if (pthread_mutex_init(&data->table[x].start, NULL))
 		{
 			ph_exit_msg(EXIT_FAILURE, PH_MUTALLOC);
 			return (EXIT_FAILURE);

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/29 16:00:39 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/30 11:44:26 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,30 @@ static int	run(t_philo *me)
 	me->data->philo_die = 1;
 	pthread_mutex_unlock(&me->data->data_rw);//TODO
 
-	return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 void	*philo_routine(void *this)
 {
 	t_philo	*me;
-	struct timeval t;
 
 	me = this;
 	if (me->num % 2)
-		msleep(me->time_eat * 0.6, me, 0);
+		msleep(me->time_eat * 0.6, me, 1);
 	if (set_death_date(me))
 		return (NULL);
 	while (1)
 	{
 		if (run(me))
 		{
-			printf("BREAK while[%d]\n", me->num);
+			ph_print(PH_DEATH, me);
+			printf("INFO: BREAK while[%d] run()\n", me->num);
+			break ;
+		}
+		if (is_death(me, 0))
+		{
+			ph_print(PH_DEATH, me);
+			printf("INFO: BREAK while[%d] is_death()\n", me->num);
 			break ;
 		}
 	}

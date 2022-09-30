@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/29 15:28:47 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/30 14:40:41 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	is_death(t_philo *me, long override)
 	if (!ret && time > me->death_date)
 	{
 		if (!me->data->philo_die)
-			printf("%lu %d %s\n", time, me->num, PH_DEATH);
+			printf("%lu %d %s\n", time - me->start_date, me->num, PH_DEATH);
 		me->data->philo_die = 1;
 		ret += EXIT_FAILURE;
 	}
@@ -87,7 +87,7 @@ int	ph_print(char *msg, t_philo *me)
 		|| pthread_mutex_lock(&me->data->print_stdout))
 		return (EXIT_FAILURE);
 	if (!me->data->philo_die)
-		printf("%lu %d %s\n", time, me->num, msg);
+		printf("%lu %d %s\n", time - me->start_date, me->num, msg);
 	if (pthread_mutex_unlock(&me->data->data_rw)
 		|| pthread_mutex_unlock(&me->data->print_stdout))
 		return (EXIT_FAILURE);
@@ -106,12 +106,13 @@ int	msleep(int ms, t_philo *me, int check_death)
 	end_time += (ms);
 	while (1)
 	{
-		usleep(500);
+		usleep(100);
 		time = gettime(&t);
 		if (!time || (check_death && is_death(me, time)))
 		{
 			if (PH_DEBUG)
-				printf("philo[%d] ms:%d die from msleep\n", me->num, ms);
+				printf("INFO: %lu %d ms:%d die in sleep\n",
+					time - me->start_date, me->num, ms);
 			return (EXIT_FAILURE);
 		}
 		if (time > (end_time - 1))

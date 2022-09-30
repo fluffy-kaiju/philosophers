@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/30 11:37:46 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/30 13:40:16 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ static int	create_thread(t_philo *philo)
  */
 static int	start_philo(t_data *data)
 {
-	int	i;
+	int				i;
+	struct timeval	t;
 
 	i = 0;
 	while (i < data->nb_philo)
 	{
 		if (PH_DEBUG)
 			printf("INFO: try to start philo[%d] thread\n", i + 1);//TODO REMOVE 
+		data->table[i].start_date = gettime(&t);//TODO check if we init in main or thread
 		if (create_thread(&data->table[i]))
 			return (EXIT_FAILURE);
 		i++;
@@ -87,7 +89,7 @@ int	run(t_data *data)
 			break ;
 	}
 	if (PH_DEBUG)
-		printf("INFO: data->philo_die true !\n");
+		printf("INFO: RUN: data->philo_die true !\n");
 	if (philo_join(data))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

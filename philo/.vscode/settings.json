@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"ph_debug.h": "c",
+		"philo.h": "c"
+	}
+}

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/30 11:35:35 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/30 13:33:10 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static int	philo_data_constructor(int nb, t_data *data)
 		table[get_index(i, nb)].time_eat = data->time_eat;
 		table[get_index(i, nb)].time_sleep = data->time_sleep;
 		table[get_index(i, nb)].nb_must_eat = data->nb_must_eat;
+		table[get_index(i, nb)].start_date = time;//TODO check if we init in main or in the thread
 		i++;
 	}
 	return (EXIT_SUCCESS);

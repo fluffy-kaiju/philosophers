@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/30 14:38:11 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/30 16:37:21 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ typedef struct s_data
 
 void	ph_exit_msg(int error, const char *msg);
 void	philo_free(t_data *data);
-long	gettime(struct timeval *time);
+long	gettime();
 int		set_death_date(t_philo *me);
 int		is_death(t_philo *me, long override);
 int		ph_print(char *msg, t_philo *me);
-int	msleep(int ms, t_philo *me, int check_death);
+int		msleep(int ms, t_philo *me, int check_death);
 
 #endif /* PHILO_H */

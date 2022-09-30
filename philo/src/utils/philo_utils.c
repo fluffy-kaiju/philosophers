@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/30 14:40:41 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/30 16:42:37 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@
 #include <sys/time.h>
 #include "ph_debug.h"
 
-long	gettime(struct timeval *time)
+long	gettime(void)
 {
-	if (gettimeofday(time, NULL))
+	struct timeval time;
+
+	if (gettimeofday(&time, NULL))
 		return (0);
-	return ((time->tv_sec * 1000) + (time->tv_usec / 1000));
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 int	set_death_date(t_philo *me)
 {
 	long			time;
-	struct timeval	t;
 
-	time = gettime(&t);
+	time = gettime();
 	if (!time)
 	{
 		if (PH_DEBUG)
@@ -51,11 +52,10 @@ int	set_death_date(t_philo *me)
 int	is_death(t_philo *me, long override)
 {
 	long			time;
-	struct timeval	t;
 	int				ret;
 
 	if (!override)
-		time = gettime(&t);
+		time = gettime();
 	else
 		time = override;
 	if (!time || pthread_mutex_lock(&me->data->data_rw))
@@ -70,26 +70,25 @@ int	is_death(t_philo *me, long override)
 		me->data->philo_die = 1;
 		ret += EXIT_FAILURE;
 	}
-		if (pthread_mutex_unlock(&me->data->data_rw))
-			return (EXIT_FAILURE);
+	if (pthread_mutex_unlock(&me->data->data_rw))
+		return (EXIT_FAILURE);
 	return (ret);
 }
 
 int	ph_print(char *msg, t_philo *me)
 {
 	long			time;
-	struct timeval	t;
 
-	time = gettime(&t);
+	time = gettime();
 	if (!time)
 		return (EXIT_FAILURE);
 	if (pthread_mutex_lock(&me->data->data_rw)
-		|| pthread_mutex_lock(&me->data->print_stdout))
+		/*|| pthread_mutex_lock(&me->data->print_stdout)*/)
 		return (EXIT_FAILURE);
 	if (!me->data->philo_die)
 		printf("%lu %d %s\n", time - me->start_date, me->num, msg);
 	if (pthread_mutex_unlock(&me->data->data_rw)
-		|| pthread_mutex_unlock(&me->data->print_stdout))
+		/*|| pthread_mutex_unlock(&me->data->print_stdout)*/)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -98,16 +97,15 @@ int	msleep(int ms, t_philo *me, int check_death)
 {
 	long			end_time;
 	long			time;
-	struct timeval	t;
 
-	end_time = gettime(&t);
-	if (!end_time)
-		return (EXIT_FAILURE);
+	end_time = gettime();
 	end_time += (ms);
 	while (1)
 	{
 		usleep(100);
-		time = gettime(&t);
+		time = gettime();
+		if (time > end_time - 1)
+			break ;
 		if (!time || (check_death && is_death(me, time)))
 		{
 			if (PH_DEBUG)
@@ -115,8 +113,6 @@ int	msleep(int ms, t_philo *me, int check_death)
 					time - me->start_date, me->num, ms);
 			return (EXIT_FAILURE);
 		}
-		if (time > (end_time - 1))
-			break ;
 	}
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/30 14:45:53 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/09/30 16:35:54 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,20 @@ static int	run(t_philo *me)
 void	*philo_routine(void *this)
 {
 	t_philo			*me;
-	struct timeval	t;
 
 	me = this;
-	ph_print(PH_THINK, me);
-	me->start_date = gettime(&t);
+	me->start_date = gettime();
 	if (set_death_date(me))
 		return (NULL);
 	if (me->num % 2)
 		msleep(me->time_eat * 0.6, me, 1);
-	while (1)
+	while (!is_death(me, 0))
 	{
 		if (run(me))
 		{
 			ph_print(PH_DEATH, me);
 			if (PH_DEBUG)
 			printf("INFO: BREAK while[%d] run()\n", me->num);
-			break ;
-		}
-		if (is_death(me, 0))
-		{
-			ph_print(PH_DEATH, me);
-			printf("INFO: BREAK while[%d] is_death()\n", me->num);
 			break ;
 		}
 		ph_print(PH_THINK, me);

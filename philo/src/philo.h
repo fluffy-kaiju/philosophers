@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 12:11:14 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:20:30 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct s_data
 	int				philo_die;
 	int				philo_error;
 	pthread_mutex_t	data_rw;
-	pthread_mutex_t	print_stdout;
 }				t_data;
 
 void	ph_exit_msg(int error, const char *msg);

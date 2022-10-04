@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 12:12:30 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:50:45 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,25 +47,6 @@ static int	start_philo(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-static int	philo_join(t_data *data)
-{
-	int	x;
-
-	x = 0;
-	while (x < data->nb_philo)
-	{
-		if (PH_DEBUG)
-			printf("INFO: try to join philo[%d] thread\n", x + 1);
-		if (pthread_join(data->table[x].thread, NULL))
-		{
-			ph_exit_msg(EXIT_FAILURE, "pthread_join fail !\n");
-			return (EXIT_FAILURE);
-		}
-		x++;
-	}
-	return (EXIT_SUCCESS);
-}
-
 int	run(t_data *data)
 {
 	if (start_philo(data))
@@ -84,8 +65,6 @@ int	run(t_data *data)
 			return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_unlock(&data->data_rw))
-		return (EXIT_FAILURE);
-	if (philo_join(data))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

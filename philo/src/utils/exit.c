@@ -6,12 +6,14 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:41:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/30 11:38:17 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:55:53 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ph_debug.h"
 #include "philo.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 
 /**
@@ -46,16 +48,34 @@ void	ph_exit_msg(int error, const char *msg)
 	}
 }
 
+static int	philo_join(t_data *data)
+{
+	int	x;
+
+	x = 0;
+	while (x < data->nb_philo)
+	{
+		if (PH_DEBUG)
+			printf("INFO: try to join philo[%d] thread\n", x + 1);
+		if (pthread_join(data->table[x].thread, NULL))
+			ph_exit_msg(EXIT_FAILURE, "pthread_join fail !\n");
+		x++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 void	philo_free(t_data *data)
 {
 	int	i;
 
+	if (philo_join(data))
+		return ;
 	pthread_mutex_destroy(&data->data_rw);
-	pthread_mutex_destroy(&data->print_stdout);
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		pthread_mutex_destroy(&data->table[i].fork);
+		if (pthread_mutex_destroy(&data->table[i].fork))
+			write(STDERR_FILENO, "Error: fail to mutex_destroy\n", 30);
 		i++;
 	}
 	free (data->table);

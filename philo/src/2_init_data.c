@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 12:10:49 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:12:15 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ static int	philo_data_constructor(int nb, t_data *data)
 {
 	int				i;
 	t_philo			*table;
-	long			time;
 
-	time = gettime();
 	data->table = ft_calloc(sizeof(t_philo) * nb);
 	if (!data->table)
 	{
@@ -77,7 +75,7 @@ static int	philo_data_constructor(int nb, t_data *data)
 		table[get_index(i, nb)].time_eat = data->time_eat;
 		table[get_index(i, nb)].time_sleep = data->time_sleep;
 		table[get_index(i, nb)].nb_must_eat = data->nb_must_eat;
-		table[get_index(i, nb)].start_date = time;//TODO check if we init in main or in the thread
+		table[get_index(i, nb)].start_date = gettime();
 		i++;
 	}
 	return (EXIT_SUCCESS);

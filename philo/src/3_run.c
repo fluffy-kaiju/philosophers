@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 12:03:19 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:12:30 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static int	create_thread(t_philo *philo)
 static int	start_philo(t_data *data)
 {
 	int				i;
-	struct timeval	t;
 
 	i = 0;
 	while (i < data->nb_philo)

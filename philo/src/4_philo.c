@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 12:07:30 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:12:41 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ static int	run(t_philo *me)
 	if (me->nb_must_eat && me->nb_eat == me->nb_must_eat)
 	{
 		if (pthread_mutex_lock(&me->data->data_rw))
-			return (NULL);
+			return (EXIT_FAILURE);
 		me->data->nb_eat++;
 		if (pthread_mutex_unlock(&me->data->data_rw))
-			return (NULL);
+			return (EXIT_FAILURE);
 		return (EXIT_FAILURE);
 	}
 	ph_print(PH_SLEEP, me);

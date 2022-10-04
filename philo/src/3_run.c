@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/30 16:51:32 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 11:31:04 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,16 @@ int	run(t_data *data)
 		if (pthread_mutex_lock(&data->data_rw))
 			return (EXIT_FAILURE);
 		// tmp = data->philo_die;
-		if (data->philo_die)
+		if (data->philo_die  || data->nb_eat == data->nb_philo)
+		{
+			printf("DEBUG [%d] || [%d][%d]\n", data->philo_die, data->nb_eat, data->nb_philo);
 			break ;
+		}
 		if (pthread_mutex_unlock(&data->data_rw))//TODO CHECK DEATH
 			return (EXIT_FAILURE);
 	}
 	if (pthread_mutex_unlock(&data->data_rw))//TODO CHECK DEATH
 		return (EXIT_FAILURE);
-	if (PH_DEBUG)
-		printf("INFO: RUN: data->philo_die true !\n");
 	if (philo_join(data))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/30 16:42:37 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 11:23:13 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,11 @@ int	ph_print(char *msg, t_philo *me)
 	time = gettime();
 	if (!time)
 		return (EXIT_FAILURE);
-	if (pthread_mutex_lock(&me->data->data_rw)
-		/*|| pthread_mutex_lock(&me->data->print_stdout)*/)
+	if (pthread_mutex_lock(&me->data->data_rw))
 		return (EXIT_FAILURE);
 	if (!me->data->philo_die)
 		printf("%lu %d %s\n", time - me->start_date, me->num, msg);
-	if (pthread_mutex_unlock(&me->data->data_rw)
-		/*|| pthread_mutex_unlock(&me->data->print_stdout)*/)
+	if (pthread_mutex_unlock(&me->data->data_rw))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

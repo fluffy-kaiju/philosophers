@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 14:26:33 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 11:31:04 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:03:19 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@ static int	start_philo(t_data *data)
 	while (i < data->nb_philo)
 	{
 		if (PH_DEBUG)
-			printf("INFO: try to start philo[%d] thread\n", i + 1);//TODO REMOVE 
-		data->table[i].start_date = gettime(&t);//TODO check if we init in main or thread
+			printf("INFO: try to start philo[%d] thread\n", i + 1);
 		if (create_thread(&data->table[i]))
 			return (EXIT_FAILURE);
 		i++;
 	}
-	// usleep(500);
 	return (EXIT_SUCCESS);
 }
 
@@ -58,7 +56,7 @@ static int	philo_join(t_data *data)
 	while (x < data->nb_philo)
 	{
 		if (PH_DEBUG)
-			printf("INFO: try to join philo[%d] thread\n", x + 1);//TODO REMOVE
+			printf("INFO: try to join philo[%d] thread\n", x + 1);
 		if (pthread_join(data->table[x].thread, NULL))
 		{
 			ph_exit_msg(EXIT_FAILURE, "pthread_join fail !\n");
@@ -71,8 +69,6 @@ static int	philo_join(t_data *data)
 
 int	run(t_data *data)
 {
-	// int	tmp;
-
 	if (start_philo(data))
 	{
 		ph_exit_msg(EXIT_FAILURE, "create_thread fail !\n");
@@ -83,16 +79,12 @@ int	run(t_data *data)
 		usleep(500);
 		if (pthread_mutex_lock(&data->data_rw))
 			return (EXIT_FAILURE);
-		// tmp = data->philo_die;
-		if (data->philo_die  || data->nb_eat == data->nb_philo)
-		{
-			printf("DEBUG [%d] || [%d][%d]\n", data->philo_die, data->nb_eat, data->nb_philo);
+		if (data->philo_die || data->nb_eat == data->nb_philo)
 			break ;
-		}
-		if (pthread_mutex_unlock(&data->data_rw))//TODO CHECK DEATH
+		if (pthread_mutex_unlock(&data->data_rw))
 			return (EXIT_FAILURE);
 	}
-	if (pthread_mutex_unlock(&data->data_rw))//TODO CHECK DEATH
+	if (pthread_mutex_unlock(&data->data_rw))
 		return (EXIT_FAILURE);
 	if (philo_join(data))
 		return (EXIT_FAILURE);

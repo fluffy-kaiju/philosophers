@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:58:39 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/27 11:41:54 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:03:54 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 	ac--;
 	av++;
 	struct_to_null(&data, sizeof(t_data));
-	if (parser(ac, av, &data) || init_data(ac, av, &data) || run(&data))//TODO make all function return error
+	if (parser(ac, av, &data) || init_data(ac, av, &data) || run(&data))
 		return_value = EXIT_FAILURE;
 	philo_free(&data);
 	return (return_value);

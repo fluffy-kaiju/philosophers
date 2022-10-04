@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 11:23:13 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:10:06 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 long	gettime(void)
 {
-	struct timeval time;
+	struct timeval	time;
 
 	if (gettimeofday(&time, NULL))
 		return (0);
@@ -32,11 +32,7 @@ int	set_death_date(t_philo *me)
 
 	time = gettime();
 	if (!time)
-	{
-		if (PH_DEBUG)
-			printf("INFO: philo[%d]: set_death_date: gettime: fail !\n", me->num);
 		return (EXIT_FAILURE);
-	}
 	me->death_date = time + me->time_die;
 	return (EXIT_SUCCESS);
 }

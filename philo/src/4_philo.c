@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 11:32:20 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:07:30 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/time.h>
-
 
 static int	eat(t_philo *me)
 {
@@ -53,6 +52,18 @@ static int	run(t_philo *me)
 {
 	if (eat(me))
 		return (EXIT_FAILURE);
+	if (me->nb_must_eat && me->nb_eat == me->nb_must_eat)
+	{
+		if (pthread_mutex_lock(&me->data->data_rw))
+			return (NULL);
+		me->data->nb_eat++;
+		if (pthread_mutex_unlock(&me->data->data_rw))
+			return (NULL);
+		return (EXIT_FAILURE);
+	}
+	ph_print(PH_SLEEP, me);
+	msleep(me->time_sleep, me, 1);
+	ph_print(PH_THINK, me);
 	return (EXIT_SUCCESS);
 }
 
@@ -75,20 +86,6 @@ void	*philo_routine(void *this)
 				printf("INFO: BREAK while[%d] run()\n", me->num);
 			break ;
 		}
-		if (me->nb_must_eat && me->nb_eat == me->nb_must_eat)
-		{
-			if (pthread_mutex_lock(&me->data->data_rw))
-				return (NULL);
-			me->data->nb_eat++;
-			if (pthread_mutex_unlock(&me->data->data_rw))
-				return (NULL);
-			if (PH_DEBUG)
-				printf("INFO: BREAK while[%d] nb_eat\n", me->num);
-			break ;
-		}
-		ph_print(PH_SLEEP, me);
-		msleep(me->time_sleep, me, 1);
-		ph_print(PH_THINK, me);
 	}
 	printf("EXIT [%d]\n", me->num);
 	return (NULL);

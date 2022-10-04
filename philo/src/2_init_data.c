@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:04:38 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/30 13:33:10 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:10:49 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ static int	philo_data_constructor(int nb, t_data *data)
 	int				i;
 	t_philo			*table;
 	long			time;
-	struct timeval	t;
 
-	time = gettime(&t);
+	time = gettime();
 	data->table = ft_calloc(sizeof(t_philo) * nb);
 	if (!data->table)
 	{
@@ -71,8 +70,6 @@ static int	philo_data_constructor(int nb, t_data *data)
 	i = 0;
 	while (i < nb)
 	{
-		if (PH_DEBUG)
-			printf("INFO: init data->table[%d] philo[%d]\n", i, i+1);
 		table[get_index(i, nb)].next = &table[get_index(i + 1, nb)].fork;
 		table[get_index(i, nb)].num = i + 1;
 		table[get_index(i, nb)].data = data;

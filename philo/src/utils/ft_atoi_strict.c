@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/09/27 11:43:38 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 12:09:36 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_isdigit(int c);
 
-static	int overflow_check(unsigned long nbr, int next_char, int isneg)
+static int	overflow_check(unsigned long nbr, int next_char, int isneg)
 {
 	unsigned long	cutoff;
 	int				cutlim;

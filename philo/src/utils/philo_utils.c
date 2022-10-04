@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 12:10:06 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 13:53:09 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	is_death(t_philo *me, long override)
 	ret = 0;
 	if (me->data->philo_die)
 			ret += EXIT_FAILURE;
-	if (!ret && time > me->death_date)
+	if (!ret && time >= me->death_date)
 	{
 		if (!me->data->philo_die)
 			printf("%lu %d %s\n", time - me->start_date, me->num, PH_DEATH);

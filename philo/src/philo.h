@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 12:20:30 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 13:40:06 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define PH_SLEEP "is sleeping"
 # define PH_THINK "is thinking"
 # define PH_DEATH "died"
+
+# define PH_DEATH_EXIT 5
+# define PH_EAT_EXIT 4
 
 typedef struct s_data	t_data;
 

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 12:12:41 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:09:21 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static int	eat(t_philo *me)
 	}
 	ph_print(PH_FORK, me);
 	ph_print(PH_EAT, me);
-	msleep(me->time_eat, me, 1);
+	if (msleep(me->time_eat, me, 1))
+		return (PH_DEATH_EXIT);
 	me->nb_eat++;
 	pthread_mutex_unlock(&me->fork);
 	pthread_mutex_unlock(me->next);
@@ -51,7 +52,7 @@ static int	eat(t_philo *me)
 static int	run(t_philo *me)
 {
 	if (eat(me))
-		return (EXIT_FAILURE);
+		return (PH_DEATH_EXIT);
 	if (me->nb_must_eat && me->nb_eat == me->nb_must_eat)
 	{
 		if (pthread_mutex_lock(&me->data->data_rw))
@@ -59,34 +60,39 @@ static int	run(t_philo *me)
 		me->data->nb_eat++;
 		if (pthread_mutex_unlock(&me->data->data_rw))
 			return (EXIT_FAILURE);
-		return (EXIT_FAILURE);
+		return (PH_EAT_EXIT);
 	}
 	ph_print(PH_SLEEP, me);
-	msleep(me->time_sleep, me, 1);
+	if (msleep(me->time_sleep, me, 1))
+		return (PH_DEATH_EXIT);
 	ph_print(PH_THINK, me);
 	return (EXIT_SUCCESS);
 }
 
 void	*philo_routine(void *this)
 {
-	t_philo			*me;
+	t_philo	*me;
+	int		ret;
 
 	me = this;
+	ph_print(PH_THINK, me);
 	me->start_date = gettime();
 	if (set_death_date(me))
 		return (NULL);
 	if (me->num % 2)
 		msleep(me->time_eat * 0.6, me, 1);
+	if (&me->fork == me->next)
+		msleep(me->time_die, me, 1);
 	while (!is_death(me, 0))
 	{
-		if (run(me))
+		ret = run(me);
+		if (ret == PH_DEATH_EXIT)
 		{
 			ph_print(PH_DEATH, me);
-			if (PH_DEBUG)
-				printf("INFO: BREAK while[%d] run()\n", me->num);
 			break ;
 		}
+		if (ret == PH_EAT_EXIT || ret == EXIT_FAILURE)
+			break ;
 	}
-	printf("EXIT [%d]\n", me->num);
 	return (NULL);
 }

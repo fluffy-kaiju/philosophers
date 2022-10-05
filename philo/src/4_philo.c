@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 14:09:21 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/05 14:42:53 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,15 @@ static int	eat(t_philo *me)
 	}
 	ph_print(PH_FORK, me);
 	pthread_mutex_lock(me->next);
-	if (is_death(me, 0))
+	if (is_death(me, 0)
+		|| ph_print(PH_FORK, me)
+		|| ph_print(PH_EAT, me)
+		|| msleep(me->time_eat, me, 1))
 	{
 		pthread_mutex_unlock(me->next);
 		pthread_mutex_unlock(&me->fork);
-		return (EXIT_FAILURE);
-	}
-	ph_print(PH_FORK, me);
-	ph_print(PH_EAT, me);
-	if (msleep(me->time_eat, me, 1))
 		return (PH_DEATH_EXIT);
+	}
 	me->nb_eat++;
 	pthread_mutex_unlock(&me->fork);
 	pthread_mutex_unlock(me->next);

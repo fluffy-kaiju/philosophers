@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 15:57:53 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 13:53:09 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/06 14:05:50 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	is_death(t_philo *me, long override)
 	if (!ret && time >= me->death_date)
 	{
 		if (!me->data->philo_die)
-			printf("%lu %d %s\n", time - me->start_date, me->num, PH_DEATH);
+			printf("%lu %d %s\n",
+				me->death_date - me->start_date, me->num, PH_DEATH);
 		me->data->philo_die = 1;
 		ret += EXIT_FAILURE;
 	}
@@ -71,11 +72,14 @@ int	is_death(t_philo *me, long override)
 	return (ret);
 }
 
-int	ph_print(char *msg, t_philo *me)
+int	ph_print(char *msg, t_philo *me, long override)
 {
 	long			time;
 
-	time = gettime();
+	if (override)
+		time = override;
+	else
+		time = gettime();
 	if (!time)
 		return (EXIT_FAILURE);
 	if (pthread_mutex_lock(&me->data->data_rw))

@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:41:52 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 14:03:06 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/06 14:45:55 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ void	philo_free(t_data *data)
 {
 	int	i;
 
-	if (philo_join(data))
+	if (data->table && philo_join(data))
 		return ;
 	pthread_mutex_destroy(&data->data_rw);
 	i = 0;
-	while (i < data->nb_philo)
+	while (data->table && i < data->nb_philo)
 	{
 		pthread_mutex_destroy(&data->table[i].fork);
 		i++;

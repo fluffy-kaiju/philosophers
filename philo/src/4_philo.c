@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/15 14:30:59 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/05 14:42:53 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/06 14:48:00 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ static int	eat(t_philo *me)
 		pthread_mutex_unlock(&me->fork);
 		return (EXIT_FAILURE);
 	}
-	ph_print(PH_FORK, me);
+	ph_print(PH_FORK, me, 0);
 	pthread_mutex_lock(me->next);
 	if (is_death(me, 0)
-		|| ph_print(PH_FORK, me)
-		|| ph_print(PH_EAT, me)
+		|| ph_print(PH_FORK, me, 0)
+		|| ph_print(PH_EAT, me, 0)
 		|| msleep(me->time_eat, me, 1))
 	{
 		pthread_mutex_unlock(me->next);
@@ -61,10 +61,10 @@ static int	run(t_philo *me)
 			return (EXIT_FAILURE);
 		return (PH_EAT_EXIT);
 	}
-	ph_print(PH_SLEEP, me);
+	ph_print(PH_SLEEP, me, 0);
 	if (msleep(me->time_sleep, me, 1))
 		return (PH_DEATH_EXIT);
-	ph_print(PH_THINK, me);
+	ph_print(PH_THINK, me, 0);
 	return (EXIT_SUCCESS);
 }
 
@@ -74,7 +74,7 @@ void	*philo_routine(void *this)
 	int		ret;
 
 	me = this;
-	ph_print(PH_THINK, me);
+	ph_print(PH_THINK, me, 0);
 	me->start_date = gettime();
 	if (set_death_date(me))
 		return (NULL);
@@ -87,7 +87,7 @@ void	*philo_routine(void *this)
 		ret = run(me);
 		if (ret == PH_DEATH_EXIT)
 		{
-			ph_print(PH_DEATH, me);
+			ph_print(PH_DEATH, me, me->death_date);
 			break ;
 		}
 		if (ret == PH_EAT_EXIT || ret == EXIT_FAILURE)

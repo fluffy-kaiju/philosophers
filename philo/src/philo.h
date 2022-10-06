@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 13:40:06 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/06 14:01:26 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	philo_free(t_data *data);
 long	gettime(void);
 int		set_death_date(t_philo *me);
 int		is_death(t_philo *me, long override);
-int		ph_print(char *msg, t_philo *me);
+int		ph_print(char *msg, t_philo *me, long override);
 int		msleep(int ms, t_philo *me, int check_death);
 
 #endif /* PHILO_H */

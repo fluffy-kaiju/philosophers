@@ -6,7 +6,7 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:21:37 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/06 14:01:26 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/10 11:54:02 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ typedef struct s_data
 	int				nb_must_eat;
 	int				nb_eat;
 	int				philo_die;
-	int				philo_error;
 	pthread_mutex_t	data_rw;
 }				t_data;
 

@@ -6,11 +6,10 @@
 /*   By: mahadad <mahadad@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:58:39 by mahadad           #+#    #+#             */
-/*   Updated: 2022/10/04 12:03:54 by mahadad          ###   ########.fr       */
+/*   Updated: 2022/10/10 12:06:44 by mahadad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Warn, is only a exemple, the code is note safe !
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>

@@ -36,7 +36,7 @@ CODE_EXT	= .c
 HEAD_EXT	= .h
 INC			= -I include
 FLAGS		= -Wall -Wextra -Werror
-FLAGS_COMP	=
+FLAGS_COMP	= -lpthread
 
 # **************************************************************************** #
 #                                  PARAMS
